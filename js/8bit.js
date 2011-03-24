@@ -9,7 +9,7 @@ $(function() {
 });
 
 $.fn.dropzone.newFilesDropped = function() {
-  $('#dropzone').empty().append($('<img src="spinner.gif" width="16" height="16" />').css({margin:'50px'}));
+  $('#dropzone').empty().append($('<img src="images/spinner.gif" width="16" height="16" />').css({margin:'50px'}));
   $('#downloadables').empty();
 };
 $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
