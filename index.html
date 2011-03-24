@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>24-bit PNG to 8-bit PNG with alpha</title>
+  <meta name="description" content="Convert 24-bit PNG files with alpha transparency to 8-bit PNG files with alpha transparency">
+  <meta name="keywords" content="PNG, image, convert, 24-bit, 8-bit, alpha, transparency">
+  <style>
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+
+
+
+  body {
+    background:#005952;
+    text-align:center;
+    font-family:monospace;
+  }
+  img {
+      margin-top: 50px;
+      max-height: 150px;
+      max-width: 270px;
+  }
+  div {
+    height:240px;
+    width:350px;
+    background:url(frame.png);
+    margin:0 auto;
+    }
+   h1 {
+     margin-top:40px;
+     text-indent:-999em;
+     height:40px;
+   }
+   body > h1:first-of-type, section > h1:first-of-type {
+     background:url(title.png) 50% 0 no-repeat;
+   }
+   body > h1+h1 {
+     background:url(drag.png) 50% 0 no-repeat;
+   }
+   body > h1:last-of-type {
+     background:url(save.png) 50% 0 no-repeat;
+   }
+p {margin:20px 0;}
+p img {cursor:pointer;}
+a {color:white;}
+section p {
+  margin:0 45px 10px 30px;
+  color:white;
+  font-size:16px;
+  }
+h2 {
+  font-size:18px;
+  font-weight:bold;
+  color:white;
+}
+#about {
+  position:absolute;
+  width:500px;
+  height:365px;
+  top:135px;
+  left:50%;
+  margin-left: -243px;
+  padding-top:35px;
+  display:none;
+  background:url(about-frame.png) 0 0 no-repeat;
+  }
+#about_close {margin-top:0;position:absolute;top:0;right:15px;}
+  </style>
+</head>
+<body>
+  <h1>8-bit alpha</h1>
+  <h1>Drag your 24-bit PNG in here:</h1>
+  <div id="dropzone"></div>
+
+  <h1>Save the 8-bit PNG from here:</h1>
+  <div id="downloadables"></div>
+
+  <p><img src="about.png" alt="About 8-bit alpha" id="questions"></p>
+<section id="about">
+  <h2>Basically?</h2>
+  <p>Upload a 24-bit PNG with alpha transparency and get back an 8-bit PNG also with alpha transparency. </p>
+  <h2>What 'n' why?</h2>
+  <p>PNGs, alpha transparency and small file sizes are all good. After reading <a href="http://calendar.perfplanet.com/2010/png-that-works/" title="Performance Calendar &raquo; PNG that works">this article</a>, I was inspired to squish all three of them together into a nice, friendly web service. Photoshop can't make 8-bit + alpha PNGs and sometimes you just don't want to open (or don't have) Fireworks so this site fills the gap. </p>
+  <h2>Who?</h2>
+  <p>Simon Madine (<a href="http://twitter.com/thingsinjars">thingsinjars</a>), Chief Roboticist at the <a href="http://angryrobotzombie.com">Angry Robot Zombie Factory</a>.</p>
+  <p><img src="close.png" alt="close this window" id="about_close"></p>
+</section>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="jquery.dnd-file-upload.js" ></script>
+    <script src="jquery.client.js" ></script>
+<script type="text/javascript" charset="utf-8">
+$(function() {
+        $("#dropzone").dropzone({
+          url : "upload.php",
+          printLogs : true,
+          uploadRateRefreshTime : 500,
+          numConcurrentUploads : 1
+        });
+        $('#questions, #about_close').click(function() {$('#about').toggle();})
+});
+
+$.fn.dropzone.newFilesDropped = function() {
+  console.log('file dropped');
+  $('#dropzone').empty().append($('<img src="spinner.gif" width="16" height="16" />').css({margin:'50px'}));
+  $('#downloadables').empty();
+};
+$.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
+  console.log('finished uploading ' + file.fileName);
+    // upload of file with given index has finished; upload took *time* mili seconds
+  $('#dropzone').empty().append('<img src="tmp/' + file.fileName + '">');
+  $('#downloadables').append('<img src="image.php?image=tmp/' + file.fileName + '">');
+};
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20281865-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>
+
