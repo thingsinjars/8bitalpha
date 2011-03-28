@@ -18,7 +18,11 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
   // has been moved to the server but might fire before the
   // PHP internals have moved the file from the temporary
   // upload folder to the intended destination.
-  delayThenShowImages(file.fileName, 10);
+	if(file.fileName.indexOf('.png') == -1) {
+		$('#downloadables').append('<img src="images/not-png.png">');
+	} else {
+  	delayThenShowImages(file.fileName, 10);
+	}
 };
 
 function delayThenShowImages(fileName, i) {
