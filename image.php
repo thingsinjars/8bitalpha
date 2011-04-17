@@ -29,6 +29,6 @@ if(imageistruecolor($src_image)) {
 
 // Output the image
 header('Content-type: image/png');
-header('Content-Disposition: attachment; filename="' . basename($_GET['image']) . '"');
+header('Content-Disposition: attachment; filename="' . preg_replace('/[^a-z0-9.-]+/i','_',basename($_GET['image'])) . '"');
 imagepng($dst_image);
 imagedestroy($dst_image);
