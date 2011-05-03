@@ -1,5 +1,8 @@
 <?php
 $filename = $_GET['image'];
+if( strpos($filename,'../')!==false ) {
+	die;
+}
 
 list($width, $height) = getimagesize($filename);
 

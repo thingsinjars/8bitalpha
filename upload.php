@@ -1,5 +1,5 @@
 <?php
-
+//The counterpart to this is a cron to delete any image in tmp older than 5 minutes
 class Uploader {
 	private $fileName;
 	private $contentLength;
