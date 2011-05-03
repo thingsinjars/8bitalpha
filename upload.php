@@ -10,7 +10,7 @@ class Uploader {
 		$this->path=$uploads;
 		// $log=fopen($this->path . 'log.txt','w');
 		if (array_key_exists('HTTP_X_FILE_NAME', $_SERVER) && array_key_exists('CONTENT_LENGTH', $_SERVER)) {
-			$this->fileName = $_SERVER['HTTP_X_FILE_NAME'];
+			$this->fileName = basename($_SERVER['HTTP_X_FILE_NAME']);
 			// fwrite($log,"Receiving '" .  $this->fileName . "'\n");
 			$this->contentLength = $_SERVER['CONTENT_LENGTH'];
 		} else {
