@@ -25,21 +25,6 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 	}
 };
 
-/**
-* @description This function takes two arguments: `fileName` and `i`. If the image
-* file with the given name exists temporarily (`UrlExists()` returns `true`), it
-* displays the image immediately.
-* 
-* @param { string } fileName - The `fileName` input parameter specifies the name of
-* the image file that should be displayed.
-* 
-* @param { integer } i - The `i` parameter is a counter that is decremented on each
-* recursive call to the `delayThenShowImages` function.
-* 
-* @returns { any } The output returned by this function is:
-* 
-* No output (void return).
-*/
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
     setTimeout(function() {delayThenShowImages(fileName, i);}, 20);
@@ -48,16 +33,7 @@ function delayThenShowImages(fileName, i) {
     $('#downloadables').append('<img src="image.php?image=tmp/' + fileName + '">');
   }
 }
-/**
-* @description This function checks whether a URL exists by sending an HTTP HEAD
-* request to the URL and returning true if the status code is not 404 (i.e., the URL
-* is found).
-* 
-* @param { string } url - The `url` input parameter specifies the URL that we want
-* to check if it exists or not.
-* 
-* @returns { boolean } The output returned by this function is `true`.
-*/
+
 function UrlExists(url) {
   var http = new XMLHttpRequest();
   http.open('HEAD', url, false);
