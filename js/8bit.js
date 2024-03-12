@@ -25,6 +25,17 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 	}
 };
 
+/**
+ * @description delays the showing of images by calling itself after a 20ms timeout
+ * if the specified file does not exist in the 'tmp' directory, otherwise it shows
+ * the image by appending it to the HTML content of a div.
+ * 
+ * @param { string } fileName - file name of an image that is to be displayed after
+ * a delay.
+ * 
+ * @param { integer } i - 10-second interval at which the images will be shown after
+ * they are fetched from the URL.
+ */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
     setTimeout(function() {delayThenShowImages(fileName, i);}, 20);
@@ -34,6 +45,15 @@ function delayThenShowImages(fileName, i) {
   }
 }
 
+/**
+ * @description checks whether a given URL exists by sending a HEAD request to the
+ * URL and returning its status code.
+ * 
+ * @param { string } url - URL to be checked for existence.
+ * 
+ * @returns { boolean } a boolean value indicating whether the specified URL exists
+ * or not.
+ */
 function UrlExists(url) {
   var http = new XMLHttpRequest();
   http.open('HEAD', url, false);
