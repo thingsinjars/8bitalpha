@@ -7,7 +7,7 @@
         "description": "",
         "items": [
           {
-            "id": "0670ceec-0045-48ed-97d0-53274ae6cdaa",
+            "id": "5d1f6b6e-704b-48fb-98c6-f1c0b4b488d8",
             "ancestors": [],
             "type": "function",
             "name": "delayThenShowImages",
@@ -15,7 +15,7 @@
               "offset": " ",
               "indent": 0,
               "insert": 28,
-              "start": 28
+              "start": 37
             },
             "params": [
               {
@@ -32,37 +32,37 @@
             "returns": false,
             "skip": false,
             "jsx": false,
-            "docLength": null,
+            "docLength": 9,
             "length": 8,
             "comment": {
-              "description": "Delays displaying images for 20 milliseconds and then shows them inside a dropzone element or appends to a list with an image tag.",
+              "description": "Delays showing images for 20 milliseconds and then shows them by either loading from a file or displaying a placeholder image, depending on whether the file exists in a temporary location or not.",
               "params": [
                 {
                   "name": "fileName",
                   "type": "string",
                   "value": null,
-                  "description": "file name to be displayed after a delay of 20 milliseconds."
+                  "description": "name of an image file to be displayed or uploaded."
                 },
                 {
                   "name": "i",
-                  "type": "integer",
+                  "type": "number",
                   "value": null,
-                  "description": "0-based index of the image file to be processed and displayed, which is used to determine whether the image has been loaded and can be shown."
+                  "description": "0-indexed iteration of the function call, which is used to control the timing of the function's execution."
                 }
               ],
               "returns": null
             }
           },
           {
-            "id": "dc8111f9-dc37-48a2-b318-e0fe491b2423",
+            "id": "892de52a-e6da-482b-8441-006c1ab05830",
             "ancestors": [],
             "type": "function",
             "name": "UrlExists",
             "location": {
               "offset": " ",
               "indent": 0,
-              "insert": 37,
-              "start": 37
+              "insert": 46,
+              "start": 55
             },
             "params": [
               {
@@ -74,16 +74,16 @@
             "returns": true,
             "skip": false,
             "jsx": false,
-            "docLength": null,
+            "docLength": 9,
             "length": 6,
             "comment": {
-              "description": "Checks if a provided URL exists by sending an HTTP HEAD request and returning whether the status code is not 404.",
+              "description": "Checks if a URL exists by sending a HEAD request and checking the response status code.",
               "params": [
                 {
                   "name": "url",
                   "type": "string",
                   "value": null,
-                  "description": "URL to be checked for existence."
+                  "description": "URL to check for existence."
                 }
               ],
               "returns": {
