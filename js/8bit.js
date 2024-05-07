@@ -25,6 +25,15 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 	}
 };
 
+/**
+ * @description Delays displaying images in a gallery, instead of immediately showing
+ * them, and recalls the function after a short delay to display more images.
+ * 
+ * @param { string } fileName - file name of an image that will be shown or delayed.
+ * 
+ * @param { integer } i - image number to be displayed in the drop zone, which increases
+ * by 1 each time the function is called.
+ */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
     setTimeout(function() {delayThenShowImages(fileName, i);}, 20);
@@ -34,6 +43,15 @@ function delayThenShowImages(fileName, i) {
   }
 }
 
+/**
+ * @description Determines if a given URL exists by making an HTTP HEAD request and
+ * returning true if the status code is not 404.
+ * 
+ * @param { string } url - URL to be checked for existence.
+ * 
+ * @returns { boolean } a boolean value indicating whether the specified URL exists
+ * or not.
+ */
 function UrlExists(url) {
   var http = new XMLHttpRequest();
   http.open('HEAD', url, false);
