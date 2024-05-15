@@ -26,13 +26,14 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 };
 
 /**
- * @description Delays displaying images for 20 milliseconds and then shows them
- * inside a dropzone element or appends to a list with an image tag.
+ * @description Delays the showing of an image file for 20 seconds after which it is
+ * displayed using JavaScript.
  * 
- * @param { string } fileName - file name to be displayed after a delay of 20 milliseconds.
+ * @param { string } fileName - name of the image file to be displayed or delayed.
  * 
- * @param { integer } i - 0-based index of the image file to be processed and displayed,
- * which is used to determine whether the image has been loaded and can be shown.
+ * @param { integer } i - index of the image file to be shown in the gallery, and its
+ * value decreases by 1 each time the function is called until it reaches 0, at which
+ * point the images are displayed.
  */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
@@ -44,10 +45,10 @@ function delayThenShowImages(fileName, i) {
 }
 
 /**
- * @description Checks if a provided URL exists by sending an HTTP HEAD request and
- * returning whether the status code is not 404.
+ * @description Checks if a URL exists by sending a HEAD request and returning the
+ * status code. If the status code is not 404, the URL exists.
  * 
- * @param { string } url - URL to be checked for existence.
+ * @param { string } url - URL to check for existence.
  * 
  * @returns { boolean } a boolean value indicating whether the specified URL exists
  * or not.

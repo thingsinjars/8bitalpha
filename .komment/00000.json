@@ -1,0 +1,99 @@
+[
+  {
+    "name": "8bit.js",
+    "path": "js/8bit.js",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "45bebf2a-8504-4cab-a31c-01f30f14d1cd",
+            "ancestors": [],
+            "type": "function",
+            "name": "delayThenShowImages",
+            "location": {
+              "offset": " ",
+              "indent": 0,
+              "insert": 28,
+              "start": 37
+            },
+            "params": [
+              {
+                "name": "fileName",
+                "value": null,
+                "type": null
+              },
+              {
+                "name": "i",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": false,
+            "skip": false,
+            "jsx": false,
+            "docLength": 9,
+            "length": 8,
+            "comment": {
+              "description": "Delays the showing of an image file for 20 seconds after which it is displayed using JavaScript.",
+              "params": [
+                {
+                  "name": "fileName",
+                  "type": "string",
+                  "value": null,
+                  "description": "name of the image file to be displayed or delayed."
+                },
+                {
+                  "name": "i",
+                  "type": "integer",
+                  "value": null,
+                  "description": "index of the image file to be shown in the gallery, and its value decreases by 1 each time the function is called until it reaches 0, at which point the images are displayed."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "91233f3f-c0cb-425d-b80d-cab421a56c1b",
+            "ancestors": [],
+            "type": "function",
+            "name": "UrlExists",
+            "location": {
+              "offset": " ",
+              "indent": 0,
+              "insert": 46,
+              "start": 55
+            },
+            "params": [
+              {
+                "name": "url",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": true,
+            "skip": false,
+            "jsx": false,
+            "docLength": 9,
+            "length": 6,
+            "comment": {
+              "description": "Checks if a URL exists by sending a HEAD request and returning the status code. If the status code is not 404, the URL exists.",
+              "params": [
+                {
+                  "name": "url",
+                  "type": "string",
+                  "value": null,
+                  "description": "URL to check for existence."
+                }
+              ],
+              "returns": {
+                "type": "boolean",
+                "description": "a boolean value indicating whether the specified URL exists or not."
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+]
