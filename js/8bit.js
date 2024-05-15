@@ -26,14 +26,14 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 };
 
 /**
- * @description Delays showing images for 20 milliseconds and then shows them by
- * either loading from a file or displaying a placeholder image, depending on whether
- * the file exists in a temporary location or not.
+ * @description Delays the display of an image for 20 milliseconds and then shows it.
+ * It repeats this process until a URL for the image does not exist, at which point
+ * it displays the image directly.
  * 
- * @param { string } fileName - name of an image file to be displayed or uploaded.
+ * @param { string } fileName - file name that is to be delayed and shown.
  * 
- * @param { number } i - 0-indexed iteration of the function call, which is used to
- * control the timing of the function's execution.
+ * @param { integer } i - 0-indexed loop counter, which is decremented in each iteration
+ * to trigger the recursive call to the function after a 20-second delay.
  */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
@@ -45,10 +45,10 @@ function delayThenShowImages(fileName, i) {
 }
 
 /**
- * @description Checks if a URL exists by sending a HEAD request and checking the
- * response status code.
+ * @description Checks if a URL exists by making an HTTP HEAD request to the URL and
+ * returning whether the status code is 404 (not found).
  * 
- * @param { string } url - URL to check for existence.
+ * @param { string } url - URL to be checked for existence.
  * 
  * @returns { boolean } a boolean value indicating whether the specified URL exists
  * or not.
@@ -68,3 +68,6 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
+
+

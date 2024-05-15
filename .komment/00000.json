@@ -7,7 +7,7 @@
         "description": "",
         "items": [
           {
-            "id": "5d1f6b6e-704b-48fb-98c6-f1c0b4b488d8",
+            "id": "7cafe2b1-bca0-4e80-8582-99e61eb1b6bc",
             "ancestors": [],
             "type": "function",
             "name": "delayThenShowImages",
@@ -35,26 +35,26 @@
             "docLength": 9,
             "length": 8,
             "comment": {
-              "description": "Delays showing images for 20 milliseconds and then shows them by either loading from a file or displaying a placeholder image, depending on whether the file exists in a temporary location or not.",
+              "description": "Delays the display of an image for 20 milliseconds and then shows it. It repeats this process until a URL for the image does not exist, at which point it displays the image directly.",
               "params": [
                 {
                   "name": "fileName",
                   "type": "string",
                   "value": null,
-                  "description": "name of an image file to be displayed or uploaded."
+                  "description": "file name that is to be delayed and shown."
                 },
                 {
                   "name": "i",
-                  "type": "number",
+                  "type": "integer",
                   "value": null,
-                  "description": "0-indexed iteration of the function call, which is used to control the timing of the function's execution."
+                  "description": "0-indexed loop counter, which is decremented in each iteration to trigger the recursive call to the function after a 20-second delay."
                 }
               ],
               "returns": null
             }
           },
           {
-            "id": "892de52a-e6da-482b-8441-006c1ab05830",
+            "id": "1bcc5123-657d-4a35-89cf-b9336f192a55",
             "ancestors": [],
             "type": "function",
             "name": "UrlExists",
@@ -77,19 +77,327 @@
             "docLength": 9,
             "length": 6,
             "comment": {
-              "description": "Checks if a URL exists by sending a HEAD request and checking the response status code.",
+              "description": "Checks if a URL exists by making an HTTP HEAD request to the URL and returning whether the status code is 404 (not found).",
               "params": [
                 {
                   "name": "url",
                   "type": "string",
                   "value": null,
-                  "description": "URL to check for existence."
+                  "description": "URL to be checked for existence."
                 }
               ],
               "returns": {
                 "type": "boolean",
                 "description": "a boolean value indicating whether the specified URL exists or not."
               }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "jquery.dnd-file-upload.js",
+    "path": "js/jquery.dnd-file-upload.js",
+    "content": {
+      "structured": {
+        "description": "",
+        "items": [
+          {
+            "id": "253190b2-914b-4205-983e-de448626b9f2",
+            "ancestors": [],
+            "type": "function",
+            "name": "dragenter",
+            "location": {
+              "offset": "\t",
+              "indent": 1,
+              "insert": 73,
+              "start": 87
+            },
+            "params": [
+              {
+                "name": "event",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": true,
+            "skip": false,
+            "jsx": false,
+            "docLength": 14,
+            "length": 5,
+            "comment": {
+              "description": "Prevents an event from propagating and halts the default action of the event, such as dropping an object, by returning `false`.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "object",
+                  "value": null,
+                  "description": "drag event that triggered the function, allowing the `stopPropagation()` and `preventDefault()` methods to be called to prevent further processing of the event."
+                }
+              ],
+              "returns": {
+                "type": "false` value",
+                "description": "`false`.\n\n\t* `event`: The `event` object that triggered the `dragenter` event is passed as an argument to the function.\n\t* `stopPropagation()`: This method is called on the `event` object to prevent the event from propagating to its parent elements.\n\t* `preventDefault()`: This method is called on the `event` object to prevent the default action of the event (in this case, dropping the dragged element) from occurring.\n\t* `return false`: This expression is returned as the value of the `dragenter` function, which indicates that the event has been handled and no further processing should be performed.\n"
+              }
+            }
+          },
+          {
+            "id": "a75671b6-66a9-4d14-86ba-140f43cfc405",
+            "ancestors": [],
+            "type": "function",
+            "name": "dragover",
+            "location": {
+              "offset": "\t",
+              "indent": 1,
+              "insert": 93,
+              "start": 105
+            },
+            "params": [
+              {
+                "name": "event",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": true,
+            "skip": false,
+            "jsx": false,
+            "docLength": 12,
+            "length": 5,
+            "comment": {
+              "description": "Prevents a dragged element from being dropped elsewhere by stopping event propagation and preventing the default action of dropping the element.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "object",
+                  "value": null,
+                  "description": "event object that triggered the dragover event, and it is stopped from propagating further and the default action of the event is prevented."
+                }
+              ],
+              "returns": {
+                "type": "false` value",
+                "description": "`false`.\n\n\t* `event`: an object representing the drag over event.\n\t* `stopPropagation()`: a method called to prevent the event from propagating up the DOM tree.\n\t* `preventDefault()`: a method called to prevent the default action of the event, in this case, dropping the element.\n\t* `return false`: a value returned to indicate that the event was not allowed to continue.\n"
+              }
+            }
+          },
+          {
+            "id": "b1296343-f74b-4b12-b02b-1bbfb1a506af",
+            "ancestors": [],
+            "type": "function",
+            "name": "drop",
+            "location": {
+              "offset": "\t",
+              "indent": 1,
+              "insert": 111,
+              "start": 122
+            },
+            "params": [
+              {
+                "name": "event",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": true,
+            "skip": false,
+            "jsx": false,
+            "docLength": 11,
+            "length": 9,
+            "comment": {
+              "description": "Prevents the default action of uploading files when a drag and drop operation is performed, and then calls the `uploadFiles()` function with the dragged files as an argument.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "object",
+                  "value": null,
+                  "description": "dataTransfer object associated with the event, providing access to the files selected by the user through the drag-and-drop operation."
+                }
+              ],
+              "returns": {
+                "type": "false` value",
+                "description": "a boolean value indicating whether the action was prevented or not.\n\n\t* `var dt = event.dataTransfer;` - The data transfer object (DTO) associated with the event.\n\t* `var files = dt.files;` - An array of files selected by the user.\n"
+              }
+            }
+          },
+          {
+            "id": "a3eaf746-5667-4a24-83d9-9cb348d6ef4e",
+            "ancestors": [],
+            "type": "function",
+            "name": "log",
+            "location": {
+              "offset": "\t",
+              "indent": 1,
+              "insert": 132,
+              "start": 141
+            },
+            "params": [
+              {
+                "name": "logMsg",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": false,
+            "skip": false,
+            "jsx": false,
+            "docLength": 9,
+            "length": 5,
+            "comment": {
+              "description": "Takes a message to be logged as an argument and logs it to the console if the `printLogs` option is enabled.",
+              "params": [
+                {
+                  "name": "logMsg",
+                  "type": "string",
+                  "value": null,
+                  "description": "message to be logged, which is passed through the `console.log()` method if the `opts.printLogs` option is enabled."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "9ba8625a-30db-4608-9578-6db0c85ced79",
+            "ancestors": [],
+            "type": "function",
+            "name": "uploadFiles",
+            "location": {
+              "offset": "\t",
+              "indent": 1,
+              "insert": 147,
+              "start": 158
+            },
+            "params": [
+              {
+                "name": "files",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": false,
+            "skip": false,
+            "jsx": false,
+            "docLength": 11,
+            "length": 30,
+            "comment": {
+              "description": "Handles uploading files to a server using XMLHttpRequest. It creates a new XHR object, sets request headers, and sends the file. It also listens for progress and load events, updating the current progress and starting time.",
+              "params": [
+                {
+                  "name": "files",
+                  "type": "array",
+                  "value": null,
+                  "description": "0-dimensional array of files that are being uploaded through the `dropzone` widget, and is used to iterate over the files and handle each file's upload individually within the function."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "cf8fcf0f-5c7a-450d-adb5-09eb9298eb57",
+            "ancestors": [],
+            "type": "function",
+            "name": "load",
+            "location": {
+              "offset": "\t",
+              "indent": 1,
+              "insert": 189,
+              "start": 199
+            },
+            "params": [
+              {
+                "name": "event",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": false,
+            "skip": false,
+            "jsx": false,
+            "docLength": 10,
+            "length": 6,
+            "comment": {
+              "description": "Updates a DownloadDropzone instance's `downloadStartTime` and triggers the `uploadFinished` callback with the provided file index and time difference since the start of the load operation.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "`Event`.",
+                  "value": null,
+                  "description": "`dropzone.files.added` event that is triggered when a new file is added to the dropzone element.\n\n\t* `event`: An object that represents an event that triggered the function to be executed. It has several properties, including:\n\t\t+ `type`: A string indicating the type of event that triggered the function (e.g., \"load\").\n\t\t+ `target`: The element or object that the event occurred on or in (e.g., a Dropzone instance).\n\t\t+ `currentTarget`: The element or object that the event is currently occurring on or in (e.g., the Dropzone instance).\n\t\t+ `eventPhase`: An integer indicating the phase of the event (e.g., 0 for the initial event, 1 for the bubbled event, etc.).\n\t\t+ `isTrigger`: A boolean indicating whether the event was directly triggered by a user interaction (e.g., clicking an element) or indirectly through another event (e.g., a link being clicked).\n"
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "abf1141c-1c7b-4bcb-b37d-255345bd8223",
+            "ancestors": [],
+            "type": "function",
+            "name": "progress",
+            "location": {
+              "offset": "\t",
+              "indent": 1,
+              "insert": 206,
+              "start": 217
+            },
+            "params": [
+              {
+                "name": "event",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": false,
+            "skip": false,
+            "jsx": false,
+            "docLength": 11,
+            "length": 24,
+            "comment": {
+              "description": "Tracks the progress of a file upload and updates the upload rate with the speed of the transfer.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "object",
+                  "value": null,
+                  "description": "upload progress event provided by the browser's FileReader API, which contains information about the loaded and total sizes of the file being uploaded, as well as other relevant details."
+                }
+              ],
+              "returns": null
+            }
+          },
+          {
+            "id": "efa608e9-609c-4ada-8c8c-1e03b4965997",
+            "ancestors": [],
+            "type": "function",
+            "name": "change",
+            "location": {
+              "offset": "\t",
+              "indent": 1,
+              "insert": 244,
+              "start": 255
+            },
+            "params": [
+              {
+                "name": "event",
+                "value": null,
+                "type": null
+              }
+            ],
+            "returns": false,
+            "skip": false,
+            "jsx": false,
+            "docLength": 11,
+            "length": 9,
+            "comment": {
+              "description": "Prevents an event from occurring, accesses the `files` property of its parent object, and calls the `uploadFiles` function with the contained files.",
+              "params": [
+                {
+                  "name": "event",
+                  "type": "object",
+                  "value": null,
+                  "description": "event object that triggered the function, and it is used to prevent the default behavior of the event, such as submitting the form, by calling the `preventDefault()` method."
+                }
+              ],
+              "returns": null
             }
           }
         ]

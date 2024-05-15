@@ -70,55 +70,70 @@
 			KBperSecond) {
 	};
 
-/**
-* @description This function prevented the default behavior of the event object and
-* stops propagation of the event.
-* 
-* @param { object } event - In the given function `dragenter`, the `event` input
-* parameter is used to intercept and manipulate the browser's native drag events.
-* 
-* @returns {  } The output returned by this function is `false`.
-* 
-* Concisely: the function stops the propagation of the event and prevents the default
-* behavior of the event from occurring (in this case - something that happens when
-* you drag an item over another one), returns false to indicate that it has handled
-* the event.
-*/
+	/**
+	 * @description Prevents an event from propagating and halts the default action of
+	 * the event, such as dropping an object, by returning `false`.
+	 * 
+	 * @param { object } event - drag event that triggered the function, allowing the
+	 * `stopPropagation()` and `preventDefault()` methods to be called to prevent further
+	 * processing of the event.
+	 * 
+	 * @returns { false` value } `false`.
+	 * 
+	 * 		- `event`: The `event` object that triggered the `dragenter` event is passed as
+	 * an argument to the function.
+	 * 		- `stopPropagation()`: This method is called on the `event` object to prevent
+	 * the event from propagating to its parent elements.
+	 * 		- `preventDefault()`: This method is called on the `event` object to prevent the
+	 * default action of the event (in this case, dropping the dragged element) from occurring.
+	 * 		- `return false`: This expression is returned as the value of the `dragenter`
+	 * function, which indicates that the event has been handled and no further processing
+	 * should be performed.
+	 */
 	function dragenter(event) {
 		event.stopPropagation();
 		event.preventDefault();
 		return false;
 	}
 
-/**
-* @description This function prevents the default behavior of an HTML5 dragover event
-* and stops the event from propagating to other elements. It also returns false to
-* indicate that the event was not handled.
-* 
-* @param { object } event - The `event` input parameter is passed to the function
-* and provides information about the event that triggered the function call (in this
-* case the "dragover" event).
-* 
-* @returns { any } The function `dragover` prevents the default behavior of an HTML
-* drag event when it is called.
-*/
+	/**
+	 * @description Prevents a dragged element from being dropped elsewhere by stopping
+	 * event propagation and preventing the default action of dropping the element.
+	 * 
+	 * @param { object } event - event object that triggered the dragover event, and it
+	 * is stopped from propagating further and the default action of the event is prevented.
+	 * 
+	 * @returns { false` value } `false`.
+	 * 
+	 * 		- `event`: an object representing the drag over event.
+	 * 		- `stopPropagation()`: a method called to prevent the event from propagating up
+	 * the DOM tree.
+	 * 		- `preventDefault()`: a method called to prevent the default action of the event,
+	 * in this case, dropping the element.
+	 * 		- `return false`: a value returned to indicate that the event was not allowed
+	 * to continue.
+	 */
 	function dragover(event) {
 		event.stopPropagation();
 		event.preventDefault();
 		return false;
 	}
 
-/**
-* @description This function drops the file(s) selected by the user into the designated
-* upload area and preventDefault() to avoid browser default behavior for handling
-* file drop event
-* 
-* @param {  } event - In this function `drop`, the `event` parameter represents the
-* dropped file or files and provides information about the event that triggered the
-* function to run.
-* 
-* @returns {  } The output returned by the `drop` function is `false`.
-*/
+	/**
+	 * @description Prevents the default action of uploading files when a drag and drop
+	 * operation is performed, and then calls the `uploadFiles()` function with the dragged
+	 * files as an argument.
+	 * 
+	 * @param { object } event - dataTransfer object associated with the event, providing
+	 * access to the files selected by the user through the drag-and-drop operation.
+	 * 
+	 * @returns { false` value } a boolean value indicating whether the action was prevented
+	 * or not.
+	 * 
+	 * 		- `var dt = event.dataTransfer;` - The data transfer object (DTO) associated
+	 * with the event.
+	 * 		- `var files = dt.files;` - An array of files selected by the user.
+	 */
 	function drop(event) {
 		var dt = event.dataTransfer;
 		var files = dt.files;
@@ -129,32 +144,28 @@
 		return false;
 	}
 
-/**
-* @description This function called "log" takes a single argument "logMsg".
-* 
-* @param { string } logMsg - The `logMsg` input parameter is the message to be logged.
-* 
-* @returns { any } The function `log()` takes a single argument `logMsg`, and if the
-* `opts.printLogs` property is truthy (i.e., not undefined), it will log the message
-* to the console.
-*/
+	/**
+	 * @description Takes a message to be logged as an argument and logs it to the console
+	 * if the `printLogs` option is enabled.
+	 * 
+	 * @param { string } logMsg - message to be logged, which is passed through the
+	 * `console.log()` method if the `opts.printLogs` option is enabled.
+	 */
 	function log(logMsg) {
 		if (opts.printLogs) {
 			// console && console.log(logMsg);
 		}
 	}
 
-/**
-* @description This function uploads files to a server using the XMLHttpRequest
-* object. It creates a new xhr object for each file and adds listeners for progress
-* and load events.
-* 
-* @param { object } files - The `files` input parameter is an array of File objects
-* representing the files that are being uploaded.
-* 
-* @returns { any } This function uploadFiles takes an array of files as input and
-* uploads each file to the server using XMLHttpRequest.
-*/
+	/**
+	 * @description Handles uploading files to a server using XMLHttpRequest. It creates
+	 * a new XHR object, sets request headers, and sends the file. It also listens for
+	 * progress and load events, updating the current progress and starting time.
+	 * 
+	 * @param { array } files - 0-dimensional array of files that are being uploaded
+	 * through the `dropzone` widget, and is used to iterate over the files and handle
+	 * each file's upload individually within the function.
+	 */
 	function uploadFiles(files) {
 		$.fn.dropzone.newFilesDropped();
 		for ( var i = 0; i < files.length; i++) {
@@ -186,16 +197,28 @@
 		}
 	}
 
-/**
-* @description This function is called when a file has finished uploading using the
-* `Dropzone` plugin. It retrieves the current time and calculates the time difference
-* between the start and end of the upload.
-* 
-* @param { object } event - The `event` parameter is not used within the `load()` function.
-* 
-* @returns { any } The function `load` returns nothing (i.e., it has no return
-* statement) and simply performs some actions when an event occurs.
-*/
+	/**
+	 * @description Updates a DownloadDropzone instance's `downloadStartTime` and triggers
+	 * the `uploadFinished` callback with the provided file index and time difference
+	 * since the start of the load operation.
+	 * 
+	 * @param { `Event`. } event - `dropzone.files.added` event that is triggered when a
+	 * new file is added to the dropzone element.
+	 * 
+	 * 		- `event`: An object that represents an event that triggered the function to be
+	 * executed. It has several properties, including:
+	 * 		+ `type`: A string indicating the type of event that triggered the function
+	 * (e.g., "load").
+	 * 		+ `target`: The element or object that the event occurred on or in (e.g., a
+	 * Dropzone instance).
+	 * 		+ `currentTarget`: The element or object that the event is currently occurring
+	 * on or in (e.g., the Dropzone instance).
+	 * 		+ `eventPhase`: An integer indicating the phase of the event (e.g., 0 for the
+	 * initial event, 1 for the bubbled event, etc.).
+	 * 		+ `isTrigger`: A boolean indicating whether the event was directly triggered by
+	 * a user interaction (e.g., clicking an element) or indirectly through another event
+	 * (e.g., a link being clicked).
+	 */
 	function load(event) {
 		var now = new Date().getTime();
 		var timeDiff = now - this.downloadStartTime;
@@ -203,17 +226,14 @@
 		log("finished loading of file " + this.fileIndex);
 	}
 
-/**
-* @description This function updates the progress of a file upload and displays the
-* speed of the upload. It calculates the progress by dividing the number of bytes
-* loaded by the total number of bytes to be uploaded.
-* 
-* @param {  } event - The `event` input parameter is an object containing information
-* about the progress of the file upload.
-* 
-* @returns {  } This function updates the progress of a file upload and calculates
-* the speed of the upload. It takes an event object as an argument.
-*/
+	/**
+	 * @description Tracks the progress of a file upload and updates the upload rate with
+	 * the speed of the transfer.
+	 * 
+	 * @param { object } event - upload progress event provided by the browser's FileReader
+	 * API, which contains information about the loaded and total sizes of the file being
+	 * uploaded, as well as other relevant details.
+	 */
 	function progress(event) {
 		if (event.lengthComputable) {
 			var percentage = Math.round((event.loaded * 100) / event.total);
@@ -241,17 +261,14 @@
 
 	// invoked when the input field has changed and new files have been dropped
 	// or selected
-/**
-* @description The function "change" is a browser event handler that is called when
-* the user selects one or more files from a file input field.
-* 
-* @param {  } event - The `event` input parameter is used to prevent the default
-* form submission behavior and allow the script to handle the event itself.
-* 
-* @returns {  } The output returned by the `change` function is undefined because
-* the function does not return any value. The function preventdefaults the event and
-* then uploads files without returning anything.
-*/
+	/**
+	 * @description Prevents an event from occurring, accesses the `files` property of
+	 * its parent object, and calls the `uploadFiles` function with the contained files.
+	 * 
+	 * @param { object } event - event object that triggered the function, and it is used
+	 * to prevent the default behavior of the event, such as submitting the form, by
+	 * calling the `preventDefault()` method.
+	 */
 	function change(event) {
 		event.preventDefault();
 
