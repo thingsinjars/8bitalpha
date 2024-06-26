@@ -1,3 +1,7 @@
+/**
+ * @description Sets up a dropzone for file uploads to `upload.php`, configures print
+ * logs and refresh time, and ties a click event to toggle the visibility of an element.
+ */
 $(function() {
   $("#dropzone").dropzone({
     url : "upload.php",
@@ -8,10 +12,34 @@ $(function() {
   $('#questions, #about_close').click(function() {$('#about').toggle();})
 });
 
+/**
+ * @description Empties any contents within the `#dropzone` element and appends an
+ * image with a margin of 50 pixels to the same element. It also empties the
+ * `#downloadables` element.
+ */
 $.fn.dropzone.newFilesDropped = function() {
   $('#dropzone').empty().append($('<img src="images/spinner.gif" />').css({margin:'50px'}));
   $('#downloadables').empty();
 };
+/**
+ * @description Processes file uploads by either displaying an image or delaying its
+ * display by 10 seconds if the file has a `.png` extension, based on the contents
+ * of the `file` object passed as an argument.
+ * 
+ * @param { integer } fileIndex - 0-based index of the file being processed within
+ * the array of files passed to the function.
+ * 
+ * @param { file reference or instance. } file - file that is being uploaded and is
+ * used to determine whether or not the file has a `.png` extension.
+ * 
+ * 	* `fileIndex`: an integer representing the index of the current file being processed
+ * in the list of files passed as an argument to the function.
+ * 	* `file`: an object that represents a file, containing various attributes such
+ * as `fileName`, `fileSize`, and `fileType`.
+ * 
+ * @param { integer } time - 10 milliseconds delay before displaying the image after
+ * it has been uploaded to the server.
+ */
 $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
   // This is one slightly nasty hack stuck in to get round
   // the fact that the upload event fires after the file
@@ -62,6 +90,12 @@ function UrlExists(url) {
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-20281865-3']);
 _gaq.push(['_trackPageview']);
+/**
+ * @description Creates a new `script` element and sets its `src` attribute to the
+ * Google Analytics tracking code. It then inserts the script into the page's `<head>`
+ * section using the `insertBefore()` method of the first `<script>` element found
+ * in the page.
+ */
 (function() {
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
