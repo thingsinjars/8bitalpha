@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "version": "1",
+    "updated_at": "2024-07-23T16:05:54.089Z",
+    "created_at": "2024-07-23T16:05:55.379Z",
+    "pipelines": [
+      "aa6bb4da-7229-46e2-b7a5-4cf21d144f8b"
+    ]
+  },
+  "lookup": [
+    [
+      "js/8bit.js",
+      "js/jquery.client.js",
+      "js/jquery.dnd-file-upload.js"
+    ]
+  ]
+}

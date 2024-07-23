@@ -1,0 +1,510 @@
+[
+  {
+    "name": "8bit.js",
+    "path": "js/8bit.js",
+    "content": {
+      "structured": {
+        "description": "Several JavaScript objects and functions that enable a web application to handle file uploads using the Dropzone library. The code sets up an upload zone with specific configurations, handles file uploads, and displays images once they have been uploaded successfully. It also includes functionality for delaying image display and checking if a URL exists before displaying it.",
+        "items": [
+          {
+            "id": "b199b05f-8586-46bb-8441-8fbc51229d1f",
+            "ancestors": [],
+            "description": "Initializes a dropzone and toggles an element on click.",
+            "name": null,
+            "location": {
+              "start": 1,
+              "insert": 2,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "higher_order_invocation",
+            "length": 9,
+            "docLength": null
+          },
+          {
+            "id": "5cf54d45-8462-b7be-9c4c-12ac7b7f5d73",
+            "ancestors": [],
+            "description": "Delays the display of images until they exist on the server, then loads and appends them to specified HTML elements after a set delay time. It recursively calls itself with decreasing `i` values if the image does not exist initially.",
+            "params": [
+              {
+                "name": "fileName",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "Used to identify an image file."
+              },
+              {
+                "name": "i",
+                "default_value": null,
+                "optional": false,
+                "type_name": "number",
+                "description": "Used for recursion."
+              }
+            ],
+            "usage": {
+              "language": "javascript",
+              "code": "delayThenShowImages('image.jpg', 5);\n",
+              "description": "\nThe above code will show images named 'image.jpg' in the provided file path after a delay of 100 milliseconds."
+            },
+            "name": "delayThenShowImages",
+            "location": {
+              "start": 37,
+              "insert": 28,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 27,
+                "end": 36
+              }
+            },
+            "item_type": "function",
+            "length": 8,
+            "docLength": 9
+          },
+          {
+            "id": "57e73600-1550-3991-cc42-7fe0e7a95398",
+            "ancestors": [],
+            "description": "Checks if a specified URL exists by sending an HTTP HEAD request to the URL and verifying that the response status is not 404 (Not Found). It returns a boolean value indicating whether the URL exists or not.",
+            "params": [
+              {
+                "name": "url",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "Used to specify a URL."
+              }
+            ],
+            "returns": {
+              "type_name": "boolean",
+              "description": "True if the specified URL exists and false otherwise, based on whether a HEAD request to that URL results in a 404 status code."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "var url = \"https://www.example.com\";\nif (UrlExists(url)) {\n  alert(\"URL exists\");\n} else {\n  alert(\"URL does not exist\");\n}\n",
+              "description": ""
+            },
+            "name": "UrlExists",
+            "location": {
+              "start": 55,
+              "insert": 46,
+              "offset": " ",
+              "indent": 0,
+              "comment": {
+                "start": 45,
+                "end": 54
+              }
+            },
+            "item_type": "function",
+            "length": 6,
+            "docLength": 9
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "jquery.client.js",
+    "path": "js/jquery.client.js",
+    "content": {
+      "structured": {
+        "description": "A BrowserDetect object that detects the user's browser type and operating system using various search strings and regular expressions. It iterates through arrays of browser and OS data to identify matches in the userAgent property. The detected information is then stored in the client object, allowing it to be accessed later.",
+        "items": [
+          {
+            "id": "6502b80c-fcff-53b2-f04f-8cee70969bf1",
+            "ancestors": [],
+            "description": "Determines and sets three properties: `browser`, `version`, and `OS`. It searches for browser, version, and operating system strings in the `navigator.userAgent` or `navigator.appVersion` using regular expressions, and assigns default values if not found.",
+            "params": [],
+            "usage": {
+              "language": "javascript",
+              "code": "var detection = new BrowserDetection();\ndetection.init();\n\nalert(detection.browser + \" \" + detection.version + \" on \" + detection.OS);\n",
+              "description": ""
+            },
+            "name": "init",
+            "location": {
+              "start": 4,
+              "insert": 4,
+              "offset": "\t",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 7,
+            "docLength": null
+          },
+          {
+            "id": "a03c9d58-b67b-e093-2e45-8aa80847b7a1",
+            "ancestors": [],
+            "description": "Iterates over an array of objects, searching for a specific substring within each object's string property or matching an object's identity with a version search value. If a match is found, it returns the corresponding identity.",
+            "params": [
+              {
+                "name": "data",
+                "default_value": null,
+                "optional": false,
+                "type_name": "(object[])",
+                "description": "Used to search for matching strings."
+              }
+            ],
+            "returns": {
+              "type_name": "string",
+              "description": "The identity property of an element from the data array if a match is found."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "var data = [{string: \"Hello, World!\", prop: true}, {string: \"Foo\", prop: false}];\nvar result = searchString(data);\n",
+              "description": ""
+            },
+            "name": "searchString",
+            "location": {
+              "start": 11,
+              "insert": 11,
+              "offset": "\t",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 13,
+            "docLength": null
+          },
+          {
+            "id": "5a22a5a6-1194-2ba5-2647-22d241cfe322",
+            "ancestors": [],
+            "description": "Extracts a floating-point version number from a given string, starting from a predefined search string within the input data. If no match is found, it returns undefined.",
+            "params": [
+              {
+                "name": "dataString",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "Searched for the version number."
+              }
+            ],
+            "returns": {
+              "type_name": "number",
+              "description": "The floating-point version extracted from the data string if a match is found; otherwise, it returns no value (i.e., undefined)."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "var dataString = \"This software version is v1.2.3\";\nvar result = searchVersion.call({versionSearchString: \"v\"}, dataString);\n",
+              "description": ""
+            },
+            "name": "searchVersion",
+            "location": {
+              "start": 24,
+              "insert": 24,
+              "offset": "\t",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 5,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "jquery.dnd-file-upload.js",
+    "path": "js/jquery.dnd-file-upload.js",
+    "content": {
+      "structured": {
+        "description": "A plugin called Dropzone that enables file uploading capabilities for HTML elements. It uses JavaScript and leverages jQuery for DOM manipulation and event handling. The plugin allows users to drop files onto an element or select them from a file input field, and then uploads those files to a server using XMLHttpRequest.",
+        "items": [
+          {
+            "id": "f1754c21-ce5f-f389-bd42-760e1c7bc6d2",
+            "ancestors": [],
+            "description": "Prevents default action.",
+            "name": null,
+            "location": {
+              "start": 28,
+              "insert": 29,
+              "offset": "\t",
+              "indent": 4,
+              "comment": null
+            },
+            "item_type": "higher_order_invocation",
+            "length": 3,
+            "docLength": null
+          },
+          {
+            "id": "ec193b0c-4116-f8a8-7040-b0b849401443",
+            "ancestors": [],
+            "description": "Stops the propagation and prevents the default action of an event, likely a drag operation, allowing for custom handling of the event within the function itself.",
+            "params": [
+              {
+                "name": "event",
+                "default_value": null,
+                "optional": false,
+                "type_name": "Event",
+                "description": "Used to handle drag events."
+              }
+            ],
+            "returns": {
+              "type_name": "boolean",
+              "description": "False."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "<div id=\"draggable\" draggable=\"true\">Draggable</div>\n<div ondragover=\"dragenter(event)\">Drop Zone</div>\n",
+              "description": ""
+            },
+            "name": "dragenter",
+            "location": {
+              "start": 87,
+              "insert": 73,
+              "offset": "\t",
+              "indent": 1,
+              "comment": {
+                "start": 72,
+                "end": 86
+              }
+            },
+            "item_type": "function",
+            "length": 5,
+            "docLength": 14
+          },
+          {
+            "id": "3da08ba1-e586-e98a-9843-e2f856e522ba",
+            "ancestors": [],
+            "description": "Prevents default browser behavior when an element is being dragged over, such as scrolling or opening a link. It stops propagation and prevents default actions to ensure control over the drag-and-drop operation. The `return false` statement also confirms this action.",
+            "params": [
+              {
+                "name": "event",
+                "default_value": null,
+                "optional": false,
+                "type_name": "Event",
+                "description": "Triggered by a drag-over event."
+              }
+            ],
+            "returns": {
+              "type_name": "boolean",
+              "description": "`false`."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "<div id=\"drop_zone\" ondragover=\"dragover(event)\">Drop files here</div>\n",
+              "description": ""
+            },
+            "name": "dragover",
+            "location": {
+              "start": 105,
+              "insert": 93,
+              "offset": "\t",
+              "indent": 1,
+              "comment": {
+                "start": 92,
+                "end": 104
+              }
+            },
+            "item_type": "function",
+            "length": 5,
+            "docLength": 12
+          },
+          {
+            "id": "e1eac5dc-c483-6fbe-114b-3e0faccda7a7",
+            "ancestors": [],
+            "description": "Handles file drop events on a drag-and-drop interface, retrieving the dropped files from the event data transfer object, preventing default behavior, and uploading the files using the `uploadFiles` function.",
+            "params": [
+              {
+                "name": "event",
+                "default_value": null,
+                "optional": false,
+                "type_name": "Event",
+                "description": "Triggered by a drag-and-drop operation."
+              }
+            ],
+            "returns": {
+              "type_name": "boolean",
+              "description": "`false`."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "<div id=\"drop_zone\" ondrop=\"drop(event)\" onchange=\"uploadFiles(event.target.files)\">Drop files here</div>\n",
+              "description": "\nThis code attaches a drop event listener to an HTML element named `drop_zone`."
+            },
+            "name": "drop",
+            "location": {
+              "start": 122,
+              "insert": 111,
+              "offset": "\t",
+              "indent": 1,
+              "comment": {
+                "start": 110,
+                "end": 121
+              }
+            },
+            "item_type": "function",
+            "length": 9,
+            "docLength": 11
+          },
+          {
+            "id": "7cde0e2e-1d55-5ca6-cd43-a5f5a1a5f441",
+            "ancestors": [],
+            "description": "Logs a message if the `printLogs` option is set to true. It checks for the existence of the `console` object before attempting to log the message, allowing the function to be used in environments where console logging may not be available.",
+            "params": [
+              {
+                "name": "logMsg",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "Used for logging messages."
+              }
+            ],
+            "usage": {
+              "language": "javascript",
+              "code": "log(\"This is a test log message\");\nlog(\"Another log message\");\n",
+              "description": ""
+            },
+            "name": "log",
+            "location": {
+              "start": 141,
+              "insert": 132,
+              "offset": "\t",
+              "indent": 1,
+              "comment": {
+                "start": 131,
+                "end": 140
+              }
+            },
+            "item_type": "function",
+            "length": 5,
+            "docLength": 9
+          },
+          {
+            "id": "37f814e2-45eb-c097-5046-1330c0ea83e9",
+            "ancestors": [],
+            "description": "Uploads multiple files by creating an XMLHttpRequest object for each file, setting up event listeners for progress and load events, and sending the file to a server with specified method and URL parameters.",
+            "params": [
+              {
+                "name": "files",
+                "default_value": null,
+                "optional": false,
+                "type_name": "File[]",
+                "description": "An array of files to be uploaded."
+              }
+            ],
+            "usage": {
+              "language": "javascript",
+              "code": "var files = [\"file1\", \"file2\"];\nuploadFiles(files);\n",
+              "description": ""
+            },
+            "name": "uploadFiles",
+            "location": {
+              "start": 158,
+              "insert": 147,
+              "offset": "\t",
+              "indent": 1,
+              "comment": {
+                "start": 146,
+                "end": 157
+              }
+            },
+            "item_type": "function",
+            "length": 30,
+            "docLength": 11
+          },
+          {
+            "id": "9f1affa0-ac85-ccbf-114a-8afe45ff78df",
+            "ancestors": [],
+            "description": "Records the current time when a file finishes downloading, calculates the time difference since the download started, and notifies the `uploadFinished` method of the `dropzone` object about the completion of the file upload, along with the file index and time taken.",
+            "params": [
+              {
+                "name": "event",
+                "default_value": null,
+                "optional": false,
+                "type_name": "Event",
+                "description": "Triggered when a file has finished loading."
+              }
+            ],
+            "usage": {
+              "language": "javascript",
+              "code": "var loadFunc = new function() {\n    this.downloadStartTime = 0;\n    this.fileIndex = 0;\n    this.fileObj = null;\n}\n\nloadFunc.load({fileIndex:1, fileObj:'sampleFile'});",
+              "description": ""
+            },
+            "name": "load",
+            "location": {
+              "start": 199,
+              "insert": 189,
+              "offset": "\t",
+              "indent": 1,
+              "comment": {
+                "start": 188,
+                "end": 198
+              }
+            },
+            "item_type": "function",
+            "length": 6,
+            "docLength": 10
+          },
+          {
+            "id": "63882e7c-1d14-669f-7f45-5a46e8e40d7c",
+            "ancestors": [],
+            "description": "Updates the file upload progress and speed by calculating the percentage, logging it, and triggering events for fileUploadProgressUpdated and fileUploadSpeedUpdated when the upload rate changes or reaches a certain threshold.",
+            "params": [
+              {
+                "name": "event",
+                "default_value": null,
+                "optional": false,
+                "type_name": "ProgressEvent",
+                "description": "Used to track file upload progress."
+              }
+            ],
+            "usage": {
+              "language": "javascript",
+              "code": "var progress = new Progress();\nprogress.progress({\n    loaded: 1024,\n    total: 1048576\n});\n",
+              "description": "\nUpload."
+            },
+            "name": "progress",
+            "location": {
+              "start": 217,
+              "insert": 206,
+              "offset": "\t",
+              "indent": 1,
+              "comment": {
+                "start": 205,
+                "end": 216
+              }
+            },
+            "item_type": "function",
+            "length": 24,
+            "docLength": 11
+          },
+          {
+            "id": "c0c9d24f-d87f-c1b9-b143-dbfdaa3b9210",
+            "ancestors": [],
+            "description": "Handles an event triggered by a file input element. It prevents default action, retrieves all selected files from the input element, and then calls another function `uploadFiles` to upload these files.",
+            "params": [
+              {
+                "name": "event",
+                "default_value": null,
+                "optional": false,
+                "type_name": "Event",
+                "description": "Triggered when an element changes, such as file upload completion."
+              }
+            ],
+            "usage": {
+              "language": "javascript",
+              "code": "<input type=\"file\" id=\"myFile\" multiple onchange=\"change(event)\" />\n",
+              "description": "\nSelecting multiple files triggers a call to the change function."
+            },
+            "name": "change",
+            "location": {
+              "start": 255,
+              "insert": 244,
+              "offset": "\t",
+              "indent": 1,
+              "comment": {
+                "start": 243,
+                "end": 254
+              }
+            },
+            "item_type": "function",
+            "length": 9,
+            "docLength": 11
+          }
+        ]
+      }
+    }
+  }
+]

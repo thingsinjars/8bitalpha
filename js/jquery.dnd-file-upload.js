@@ -26,6 +26,8 @@
 			});
 			fileInput.attr("multiple", "multiple");
 			fileInput.click(function() {
+				// Prevents default action.
+
 				return false;
 			});
 			this.append(fileInput);
@@ -70,55 +72,46 @@
 			KBperSecond) {
 	};
 
-/**
-* @description This function prevented the default behavior of the event object and
-* stops propagation of the event.
-* 
-* @param { object } event - In the given function `dragenter`, the `event` input
-* parameter is used to intercept and manipulate the browser's native drag events.
-* 
-* @returns {  } The output returned by this function is `false`.
-* 
-* Concisely: the function stops the propagation of the event and prevents the default
-* behavior of the event from occurring (in this case - something that happens when
-* you drag an item over another one), returns false to indicate that it has handled
-* the event.
-*/
+	/**
+	 * @description Stops the propagation and prevents the default action of an event,
+	 * likely a drag operation, allowing for custom handling of the event within the
+	 * function itself.
+	 * 
+	 * @param {Event} event - Used to handle drag events.
+	 * 
+	 * @returns {boolean} False.
+	 */
 	function dragenter(event) {
 		event.stopPropagation();
 		event.preventDefault();
 		return false;
 	}
 
-/**
-* @description This function prevents the default behavior of an HTML5 dragover event
-* and stops the event from propagating to other elements. It also returns false to
-* indicate that the event was not handled.
-* 
-* @param { object } event - The `event` input parameter is passed to the function
-* and provides information about the event that triggered the function call (in this
-* case the "dragover" event).
-* 
-* @returns { any } The function `dragover` prevents the default behavior of an HTML
-* drag event when it is called.
-*/
+	/**
+	 * @description Prevents default browser behavior when an element is being dragged
+	 * over, such as scrolling or opening a link. It stops propagation and prevents default
+	 * actions to ensure control over the drag-and-drop operation. The `return false`
+	 * statement also confirms this action.
+	 * 
+	 * @param {Event} event - Triggered by a drag-over event.
+	 * 
+	 * @returns {boolean} `false`.
+	 */
 	function dragover(event) {
 		event.stopPropagation();
 		event.preventDefault();
 		return false;
 	}
 
-/**
-* @description This function drops the file(s) selected by the user into the designated
-* upload area and preventDefault() to avoid browser default behavior for handling
-* file drop event
-* 
-* @param {  } event - In this function `drop`, the `event` parameter represents the
-* dropped file or files and provides information about the event that triggered the
-* function to run.
-* 
-* @returns {  } The output returned by the `drop` function is `false`.
-*/
+	/**
+	 * @description Handles file drop events on a drag-and-drop interface, retrieving the
+	 * dropped files from the event data transfer object, preventing default behavior,
+	 * and uploading the files using the `uploadFiles` function.
+	 * 
+	 * @param {Event} event - Triggered by a drag-and-drop operation.
+	 * 
+	 * @returns {boolean} `false`.
+	 */
 	function drop(event) {
 		var dt = event.dataTransfer;
 		var files = dt.files;
@@ -129,32 +122,27 @@
 		return false;
 	}
 
-/**
-* @description This function called "log" takes a single argument "logMsg".
-* 
-* @param { string } logMsg - The `logMsg` input parameter is the message to be logged.
-* 
-* @returns { any } The function `log()` takes a single argument `logMsg`, and if the
-* `opts.printLogs` property is truthy (i.e., not undefined), it will log the message
-* to the console.
-*/
+	/**
+	 * @description Logs a message if the `printLogs` option is set to true. It checks
+	 * for the existence of the `console` object before attempting to log the message,
+	 * allowing the function to be used in environments where console logging may not be
+	 * available.
+	 * 
+	 * @param {string} logMsg - Used for logging messages.
+	 */
 	function log(logMsg) {
 		if (opts.printLogs) {
 			// console && console.log(logMsg);
 		}
 	}
 
-/**
-* @description This function uploads files to a server using the XMLHttpRequest
-* object. It creates a new xhr object for each file and adds listeners for progress
-* and load events.
-* 
-* @param { object } files - The `files` input parameter is an array of File objects
-* representing the files that are being uploaded.
-* 
-* @returns { any } This function uploadFiles takes an array of files as input and
-* uploads each file to the server using XMLHttpRequest.
-*/
+	/**
+	 * @description Uploads multiple files by creating an XMLHttpRequest object for each
+	 * file, setting up event listeners for progress and load events, and sending the
+	 * file to a server with specified method and URL parameters.
+	 * 
+	 * @param {File[]} files - An array of files to be uploaded.
+	 */
 	function uploadFiles(files) {
 		$.fn.dropzone.newFilesDropped();
 		for ( var i = 0; i < files.length; i++) {
@@ -186,16 +174,14 @@
 		}
 	}
 
-/**
-* @description This function is called when a file has finished uploading using the
-* `Dropzone` plugin. It retrieves the current time and calculates the time difference
-* between the start and end of the upload.
-* 
-* @param { object } event - The `event` parameter is not used within the `load()` function.
-* 
-* @returns { any } The function `load` returns nothing (i.e., it has no return
-* statement) and simply performs some actions when an event occurs.
-*/
+	/**
+	 * @description Records the current time when a file finishes downloading, calculates
+	 * the time difference since the download started, and notifies the `uploadFinished`
+	 * method of the `dropzone` object about the completion of the file upload, along
+	 * with the file index and time taken.
+	 * 
+	 * @param {Event} event - Triggered when a file has finished loading.
+	 */
 	function load(event) {
 		var now = new Date().getTime();
 		var timeDiff = now - this.downloadStartTime;
@@ -203,17 +189,13 @@
 		log("finished loading of file " + this.fileIndex);
 	}
 
-/**
-* @description This function updates the progress of a file upload and displays the
-* speed of the upload. It calculates the progress by dividing the number of bytes
-* loaded by the total number of bytes to be uploaded.
-* 
-* @param {  } event - The `event` input parameter is an object containing information
-* about the progress of the file upload.
-* 
-* @returns {  } This function updates the progress of a file upload and calculates
-* the speed of the upload. It takes an event object as an argument.
-*/
+	/**
+	 * @description Updates the file upload progress and speed by calculating the percentage,
+	 * logging it, and triggering events for fileUploadProgressUpdated and fileUploadSpeedUpdated
+	 * when the upload rate changes or reaches a certain threshold.
+	 * 
+	 * @param {ProgressEvent} event - Used to track file upload progress.
+	 */
 	function progress(event) {
 		if (event.lengthComputable) {
 			var percentage = Math.round((event.loaded * 100) / event.total);
@@ -241,17 +223,13 @@
 
 	// invoked when the input field has changed and new files have been dropped
 	// or selected
-/**
-* @description The function "change" is a browser event handler that is called when
-* the user selects one or more files from a file input field.
-* 
-* @param {  } event - The `event` input parameter is used to prevent the default
-* form submission behavior and allow the script to handle the event itself.
-* 
-* @returns {  } The output returned by the `change` function is undefined because
-* the function does not return any value. The function preventdefaults the event and
-* then uploads files without returning anything.
-*/
+	/**
+	 * @description Handles an event triggered by a file input element. It prevents default
+	 * action, retrieves all selected files from the input element, and then calls another
+	 * function `uploadFiles` to upload these files.
+	 * 
+	 * @param {Event} event - Triggered when an element changes, such as file upload completion.
+	 */
 	function change(event) {
 		event.preventDefault();
 
