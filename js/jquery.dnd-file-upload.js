@@ -26,7 +26,7 @@
 			});
 			fileInput.attr("multiple", "multiple");
 			fileInput.click(function() {
-				// Prevents default action.
+				// Cancels form submission.
 
 				return false;
 			});
@@ -73,13 +73,14 @@
 	};
 
 	/**
-	 * @description Stops the propagation and prevents the default action of an event,
-	 * likely a drag operation, allowing for custom handling of the event within the
-	 * function itself.
+	 * @description Stops propagation and prevents default action for a drag event,
+	 * effectively preventing the browser's default behavior when an element is entered
+	 * while dragging an item. This ensures that the dropped item can be handled by the
+	 * application instead of being processed by the browser.
 	 * 
-	 * @param {Event} event - Used to handle drag events.
+	 * @param {Event} event - Used to prevent default browser behavior.
 	 * 
-	 * @returns {boolean} False.
+	 * @returns {boolean} `false`.
 	 */
 	function dragenter(event) {
 		event.stopPropagation();
@@ -88,12 +89,11 @@
 	}
 
 	/**
-	 * @description Prevents default browser behavior when an element is being dragged
-	 * over, such as scrolling or opening a link. It stops propagation and prevents default
-	 * actions to ensure control over the drag-and-drop operation. The `return false`
-	 * statement also confirms this action.
+	 * @description Stops event propagation and prevents default browser behavior for a
+	 * dragged-over element, allowing the application to handle the drag operation instead.
+	 * It returns `false` to indicate that the event has been handled.
 	 * 
-	 * @param {Event} event - Triggered by a drag-over event.
+	 * @param {Event} event - Used to handle drag-and-drop events.
 	 * 
 	 * @returns {boolean} `false`.
 	 */
@@ -104,13 +104,13 @@
 	}
 
 	/**
-	 * @description Handles file drop events on a drag-and-drop interface, retrieving the
-	 * dropped files from the event data transfer object, preventing default behavior,
-	 * and uploading the files using the `uploadFiles` function.
+	 * @description Handles drag-and-drop file uploads. When a file is dropped onto an
+	 * element, it retrieves the dropped files, prevents the default browser behavior,
+	 * and calls the `uploadFiles` function to handle the file upload process.
 	 * 
 	 * @param {Event} event - Triggered by a drag-and-drop operation.
 	 * 
-	 * @returns {boolean} `false`.
+	 * @returns {boolean} Set to `false`.
 	 */
 	function drop(event) {
 		var dt = event.dataTransfer;
@@ -123,10 +123,9 @@
 	}
 
 	/**
-	 * @description Logs a message if the `printLogs` option is set to true. It checks
-	 * for the existence of the `console` object before attempting to log the message,
-	 * allowing the function to be used in environments where console logging may not be
-	 * available.
+	 * @description Checks if the `printLogs` option is set to true. If it is, it logs a
+	 * message using the `console.log` method if `console` object exists. The logged
+	 * message is passed as an argument to this function.
 	 * 
 	 * @param {string} logMsg - Used for logging messages.
 	 */
@@ -137,11 +136,11 @@
 	}
 
 	/**
-	 * @description Uploads multiple files by creating an XMLHttpRequest object for each
-	 * file, setting up event listeners for progress and load events, and sending the
-	 * file to a server with specified method and URL parameters.
+	 * @description Uploads a list of files to a server using XMLHttpRequest. It creates
+	 * an XMLHttpRequest object for each file, sets headers and listeners, and sends the
+	 * file data. The function also updates a dropzone's UI state during the upload process.
 	 * 
-	 * @param {File[]} files - An array of files to be uploaded.
+	 * @param {File[]} files - Used to pass an array of files for upload.
 	 */
 	function uploadFiles(files) {
 		$.fn.dropzone.newFilesDropped();
@@ -175,12 +174,11 @@
 	}
 
 	/**
-	 * @description Records the current time when a file finishes downloading, calculates
-	 * the time difference since the download started, and notifies the `uploadFinished`
-	 * method of the `dropzone` object about the completion of the file upload, along
-	 * with the file index and time taken.
+	 * @description Updates a timestamp difference for the current file upload and triggers
+	 * an event to notify the completion of uploading, logging a message to indicate the
+	 * finished loading process.
 	 * 
-	 * @param {Event} event - Triggered when a file has finished loading.
+	 * @param {Event} event - Triggered by a file loading operation completion.
 	 */
 	function load(event) {
 		var now = new Date().getTime();
@@ -190,9 +188,9 @@
 	}
 
 	/**
-	 * @description Updates the file upload progress and speed by calculating the percentage,
-	 * logging it, and triggering events for fileUploadProgressUpdated and fileUploadSpeedUpdated
-	 * when the upload rate changes or reaches a certain threshold.
+	 * @description Updates the progress of a file upload by calculating the percentage
+	 * completed and triggering events for speed update when the upload rate refresh time
+	 * is reached.
 	 * 
 	 * @param {ProgressEvent} event - Used to track file upload progress.
 	 */
@@ -224,11 +222,11 @@
 	// invoked when the input field has changed and new files have been dropped
 	// or selected
 	/**
-	 * @description Handles an event triggered by a file input element. It prevents default
-	 * action, retrieves all selected files from the input element, and then calls another
-	 * function `uploadFiles` to upload these files.
+	 * @description Handles an event triggered by a file input element. It prevents the
+	 * default action, retrieves all selected files, and then uploads them using the
+	 * `uploadFiles` function.
 	 * 
-	 * @param {Event} event - Triggered when an element changes, such as file upload completion.
+	 * @param {Event} event - Triggered by an HTML file input field change event.
 	 */
 	function change(event) {
 		event.preventDefault();

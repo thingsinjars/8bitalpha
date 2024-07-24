@@ -4,12 +4,12 @@
     "path": "js/8bit.js",
     "content": {
       "structured": {
-        "description": "Several JavaScript objects and functions that enable a web application to handle file uploads using the Dropzone library. The code sets up an upload zone with specific configurations, handles file uploads, and displays images once they have been uploaded successfully. It also includes functionality for delaying image display and checking if a URL exists before displaying it.",
+        "description": "A dropzone element that allows users to upload files and displays uploaded images after a delay. It uses the jQuery library to handle events such as file uploads and image displaying. The code also includes functions to check if a URL exists and to track page views using Google Analytics.",
         "items": [
           {
-            "id": "b199b05f-8586-46bb-8441-8fbc51229d1f",
+            "id": "3a59a4b1-68f3-e5ac-0d40-3a550d44589b",
             "ancestors": [],
-            "description": "Initializes a dropzone and toggles an element on click.",
+            "description": "Initializes a dropzone and toggles an about section.",
             "name": null,
             "location": {
               "start": 1,
@@ -23,29 +23,29 @@
             "docLength": null
           },
           {
-            "id": "5cf54d45-8462-b7be-9c4c-12ac7b7f5d73",
+            "id": "b9a7bb95-4881-e786-b846-8ab6f782f323",
             "ancestors": [],
-            "description": "Delays the display of images until they exist on the server, then loads and appends them to specified HTML elements after a set delay time. It recursively calls itself with decreasing `i` values if the image does not exist initially.",
+            "description": "Checks if a file exists at the specified URL. If not, it recursively calls itself with a delay until the file is available or a maximum attempt count is reached. Once the file is available, it appends the image to two HTML elements.",
             "params": [
               {
                 "name": "fileName",
                 "default_value": null,
                 "optional": false,
                 "type_name": "string",
-                "description": "Used to identify an image file."
+                "description": "Used to identify the image file name."
               },
               {
                 "name": "i",
                 "default_value": null,
                 "optional": false,
                 "type_name": "number",
-                "description": "Used for recursion."
+                "description": "Used to limit recursive calls."
               }
             ],
             "usage": {
               "language": "javascript",
-              "code": "delayThenShowImages('image.jpg', 5);\n",
-              "description": "\nThe above code will show images named 'image.jpg' in the provided file path after a delay of 100 milliseconds."
+              "code": "delayThenShowImages('test.png', 5);\n",
+              "description": "\nThis code will display the 'test.png' image after a certain time."
             },
             "name": "delayThenShowImages",
             "location": {
@@ -63,25 +63,25 @@
             "docLength": 9
           },
           {
-            "id": "57e73600-1550-3991-cc42-7fe0e7a95398",
+            "id": "a1639b98-ea4d-10b2-a049-95cbe48186f6",
             "ancestors": [],
-            "description": "Checks if a specified URL exists by sending an HTTP HEAD request to the URL and verifying that the response status is not 404 (Not Found). It returns a boolean value indicating whether the URL exists or not.",
+            "description": "Checks whether a specified URL exists by sending a HEAD request to it using XMLHttpRequest. It returns true if the status code is not 404 (indicating the resource exists), and false otherwise, indicating that the resource does not exist or cannot be accessed.",
             "params": [
               {
                 "name": "url",
                 "default_value": null,
                 "optional": false,
                 "type_name": "string",
-                "description": "Used to specify a URL."
+                "description": "Used to specify the URL to check for existence."
               }
             ],
             "returns": {
               "type_name": "boolean",
-              "description": "True if the specified URL exists and false otherwise, based on whether a HEAD request to that URL results in a 404 status code."
+              "description": "True if the specified URL exists and false otherwise, based on the HTTP status code received from the request."
             },
             "usage": {
               "language": "javascript",
-              "code": "var url = \"https://www.example.com\";\nif (UrlExists(url)) {\n  alert(\"URL exists\");\n} else {\n  alert(\"URL does not exist\");\n}\n",
+              "code": "var result = UrlExists('https://www.example.com');\nif (result) {\n  alert('URL exists');\n} else {\n  alert('URL does not exist');\n}\n",
               "description": ""
             },
             "name": "UrlExists",
@@ -108,16 +108,16 @@
     "path": "js/jquery.client.js",
     "content": {
       "structured": {
-        "description": "A BrowserDetect object that detects the user's browser type and operating system using various search strings and regular expressions. It iterates through arrays of browser and OS data to identify matches in the userAgent property. The detected information is then stored in the client object, allowing it to be accessed later.",
+        "description": "A BrowserDetect object that detects the browser and operating system of the user's device by parsing the navigator.userAgent string and other properties. It uses an array of objects with specific search strings, substrings, and version search patterns to identify the browser and OS. The detected information is then stored in the client object.",
         "items": [
           {
-            "id": "6502b80c-fcff-53b2-f04f-8cee70969bf1",
+            "id": "aa6739fb-a430-c8b8-594b-55d3198a00da",
             "ancestors": [],
-            "description": "Determines and sets three properties: `browser`, `version`, and `OS`. It searches for browser, version, and operating system strings in the `navigator.userAgent` or `navigator.appVersion` using regular expressions, and assigns default values if not found.",
+            "description": "Initializes browser, version and operating system (OS) information by searching for specific strings in userAgent or appVersion properties. If not found, it sets default values.",
             "params": [],
             "usage": {
               "language": "javascript",
-              "code": "var detection = new BrowserDetection();\ndetection.init();\n\nalert(detection.browser + \" \" + detection.version + \" on \" + detection.OS);\n",
+              "code": "var detector = new Detector();\ndetector.init();\n",
               "description": ""
             },
             "name": "init",
@@ -133,25 +133,25 @@
             "docLength": null
           },
           {
-            "id": "a03c9d58-b67b-e093-2e45-8aa80847b7a1",
+            "id": "6b517ff9-7a26-5385-8942-3f4fc2b7d6fe",
             "ancestors": [],
-            "description": "Iterates over an array of objects, searching for a specific substring within each object's string property or matching an object's identity with a version search value. If a match is found, it returns the corresponding identity.",
+            "description": "Iterates over an array of objects, extracting a string and property from each object. It searches for a substring within the string or checks if the property exists. If a match is found, it returns the identity value associated with the matching object.",
             "params": [
               {
                 "name": "data",
                 "default_value": null,
                 "optional": false,
-                "type_name": "(object[])",
-                "description": "Used to search for matching strings."
+                "type_name": "(object[]) | undefined",
+                "description": "An array-like object."
               }
             ],
             "returns": {
-              "type_name": "string",
-              "description": "The identity property of an element from the data array if a match is found."
+              "type_name": "string | object",
+              "description": "`data[i].identity`, where `i` is an index of the array `data`. The actual returned value may be one of the elements in the `data` array or null if no match is found."
             },
             "usage": {
               "language": "javascript",
-              "code": "var data = [{string: \"Hello, World!\", prop: true}, {string: \"Foo\", prop: false}];\nvar result = searchString(data);\n",
+              "code": "var data = [{string: 'Hello World', prop: null, subString: 'World', identity: '1'},\n           {string: null, prop: 'prop', versionSearch: 'hello', identity: '2'}];\nvar result = searchString(data);\n",
               "description": ""
             },
             "name": "searchString",
@@ -167,25 +167,25 @@
             "docLength": null
           },
           {
-            "id": "5a22a5a6-1194-2ba5-2647-22d241cfe322",
+            "id": "e80e9a36-35e1-299e-274a-637df03dca1d",
             "ancestors": [],
-            "description": "Extracts a floating-point version number from a given string, starting from a predefined search string within the input data. If no match is found, it returns undefined.",
+            "description": "Extracts a version number from a given string, starting with a predefined search string. If found, it parses the version number as a floating-point number and returns it; otherwise, it returns nothing (i.e., undefined).",
             "params": [
               {
                 "name": "dataString",
                 "default_value": null,
                 "optional": false,
                 "type_name": "string",
-                "description": "Searched for the version number."
+                "description": "Searched for specific version number."
               }
             ],
             "returns": {
               "type_name": "number",
-              "description": "The floating-point version extracted from the data string if a match is found; otherwise, it returns no value (i.e., undefined)."
+              "description": "Parsed from a substring of the input string, starting after the position where the search string was found. If no match is found, an undefined value is returned."
             },
             "usage": {
               "language": "javascript",
-              "code": "var dataString = \"This software version is v1.2.3\";\nvar result = searchVersion.call({versionSearchString: \"v\"}, dataString);\n",
+              "code": "var dataString = \"Version 1.2.3\";\nvar result = searchVersion(dataString);\nif (result) {\n\t// do something with the version number\n}",
               "description": ""
             },
             "name": "searchVersion",
@@ -209,12 +209,12 @@
     "path": "js/jquery.dnd-file-upload.js",
     "content": {
       "structured": {
-        "description": "A plugin called Dropzone that enables file uploading capabilities for HTML elements. It uses JavaScript and leverages jQuery for DOM manipulation and event handling. The plugin allows users to drop files onto an element or select them from a file input field, and then uploads those files to a server using XMLHttpRequest.",
+        "description": "A jQuery plugin called Dropzone that enables file uploads via drag-and-drop functionality. It extends the default options with those provided and adds event listeners for dragenter, dragover, and drop events. The plugin supports multiple concurrent uploads, logs upload progress and speed, and provides callbacks for new files dropped, upload started, finished, and progress updated.",
         "items": [
           {
-            "id": "f1754c21-ce5f-f389-bd42-760e1c7bc6d2",
+            "id": "830cdd48-c65e-6499-6847-965682594802",
             "ancestors": [],
-            "description": "Prevents default action.",
+            "description": "Cancels form submission.",
             "name": null,
             "location": {
               "start": 28,
@@ -228,25 +228,25 @@
             "docLength": null
           },
           {
-            "id": "ec193b0c-4116-f8a8-7040-b0b849401443",
+            "id": "36270cd6-9bd6-52ba-354e-71689976f18b",
             "ancestors": [],
-            "description": "Stops the propagation and prevents the default action of an event, likely a drag operation, allowing for custom handling of the event within the function itself.",
+            "description": "Stops propagation and prevents default action for a drag event, effectively preventing the browser's default behavior when an element is entered while dragging an item. This ensures that the dropped item can be handled by the application instead of being processed by the browser.",
             "params": [
               {
                 "name": "event",
                 "default_value": null,
                 "optional": false,
                 "type_name": "Event",
-                "description": "Used to handle drag events."
+                "description": "Used to prevent default browser behavior."
               }
             ],
             "returns": {
               "type_name": "boolean",
-              "description": "False."
+              "description": "`false`."
             },
             "usage": {
               "language": "javascript",
-              "code": "<div id=\"draggable\" draggable=\"true\">Draggable</div>\n<div ondragover=\"dragenter(event)\">Drop Zone</div>\n",
+              "code": "<div id=\"drop-zone\" ondragover=\"dragenter(event)\" ondrop=\"drop(event)\"></div>\n",
               "description": ""
             },
             "name": "dragenter",
@@ -265,16 +265,16 @@
             "docLength": 14
           },
           {
-            "id": "3da08ba1-e586-e98a-9843-e2f856e522ba",
+            "id": "921b28aa-db72-8e98-f64c-e030d0cc8ba3",
             "ancestors": [],
-            "description": "Prevents default browser behavior when an element is being dragged over, such as scrolling or opening a link. It stops propagation and prevents default actions to ensure control over the drag-and-drop operation. The `return false` statement also confirms this action.",
+            "description": "Stops event propagation and prevents default browser behavior for a dragged-over element, allowing the application to handle the drag operation instead. It returns `false` to indicate that the event has been handled.",
             "params": [
               {
                 "name": "event",
                 "default_value": null,
                 "optional": false,
                 "type_name": "Event",
-                "description": "Triggered by a drag-over event."
+                "description": "Used to handle drag-and-drop events."
               }
             ],
             "returns": {
@@ -283,8 +283,8 @@
             },
             "usage": {
               "language": "javascript",
-              "code": "<div id=\"drop_zone\" ondragover=\"dragover(event)\">Drop files here</div>\n",
-              "description": ""
+              "code": "<div id=\"drag\" ondrop=\"handleDrop(event)\" ondragover=\"dragover(event)\"></div>\n",
+              "description": "\nThis code sets up a div element with event listeners for drop and drag-over events."
             },
             "name": "dragover",
             "location": {
@@ -302,9 +302,9 @@
             "docLength": 12
           },
           {
-            "id": "e1eac5dc-c483-6fbe-114b-3e0faccda7a7",
+            "id": "a133bfb5-2fde-5ab8-de45-2d21ba237fd4",
             "ancestors": [],
-            "description": "Handles file drop events on a drag-and-drop interface, retrieving the dropped files from the event data transfer object, preventing default behavior, and uploading the files using the `uploadFiles` function.",
+            "description": "Handles drag-and-drop file uploads. When a file is dropped onto an element, it retrieves the dropped files, prevents the default browser behavior, and calls the `uploadFiles` function to handle the file upload process.",
             "params": [
               {
                 "name": "event",
@@ -316,12 +316,12 @@
             ],
             "returns": {
               "type_name": "boolean",
-              "description": "`false`."
+              "description": "Set to `false`."
             },
             "usage": {
               "language": "javascript",
-              "code": "<div id=\"drop_zone\" ondrop=\"drop(event)\" onchange=\"uploadFiles(event.target.files)\">Drop files here</div>\n",
-              "description": "\nThis code attaches a drop event listener to an HTML element named `drop_zone`."
+              "code": "<div id=\"drop-area\" ondrop=\"drop(event)\">Drop files here</div>\n",
+              "description": "\nThe div with id \"drop-area\" will trigger the drop function when a file is dropped onto it."
             },
             "name": "drop",
             "location": {
@@ -339,9 +339,9 @@
             "docLength": 11
           },
           {
-            "id": "7cde0e2e-1d55-5ca6-cd43-a5f5a1a5f441",
+            "id": "120f9e06-a95e-9a95-7c4b-90f4237774b3",
             "ancestors": [],
-            "description": "Logs a message if the `printLogs` option is set to true. It checks for the existence of the `console` object before attempting to log the message, allowing the function to be used in environments where console logging may not be available.",
+            "description": "Checks if the `printLogs` option is set to true. If it is, it logs a message using the `console.log` method if `console` object exists. The logged message is passed as an argument to this function.",
             "params": [
               {
                 "name": "logMsg",
@@ -353,8 +353,8 @@
             ],
             "usage": {
               "language": "javascript",
-              "code": "log(\"This is a test log message\");\nlog(\"Another log message\");\n",
-              "description": ""
+              "code": "log(\"Hello World\");\n",
+              "description": "\n\nThe above code would print \"Hello World\" if opts.printLogs is set to true."
             },
             "name": "log",
             "location": {
@@ -372,21 +372,21 @@
             "docLength": 9
           },
           {
-            "id": "37f814e2-45eb-c097-5046-1330c0ea83e9",
+            "id": "38a0a05d-c59d-228a-6f4f-9ec21bdd4403",
             "ancestors": [],
-            "description": "Uploads multiple files by creating an XMLHttpRequest object for each file, setting up event listeners for progress and load events, and sending the file to a server with specified method and URL parameters.",
+            "description": "Uploads a list of files to a server using XMLHttpRequest. It creates an XMLHttpRequest object for each file, sets headers and listeners, and sends the file data. The function also updates a dropzone's UI state during the upload process.",
             "params": [
               {
                 "name": "files",
                 "default_value": null,
                 "optional": false,
                 "type_name": "File[]",
-                "description": "An array of files to be uploaded."
+                "description": "Used to pass an array of files for upload."
               }
             ],
             "usage": {
               "language": "javascript",
-              "code": "var files = [\"file1\", \"file2\"];\nuploadFiles(files);\n",
+              "code": "uploadFiles([\n    new File([\"Content of file1.txt\"], \"file1.txt\", {type: \"text/plain\"}),\n    new File([\"Content of file2.txt\"], \"file2.txt\", {type: \"text/plain\"})\n]);\n",
               "description": ""
             },
             "name": "uploadFiles",
@@ -405,22 +405,22 @@
             "docLength": 11
           },
           {
-            "id": "9f1affa0-ac85-ccbf-114a-8afe45ff78df",
+            "id": "c05141bc-3c1d-36a2-9248-bfb098af0bb5",
             "ancestors": [],
-            "description": "Records the current time when a file finishes downloading, calculates the time difference since the download started, and notifies the `uploadFinished` method of the `dropzone` object about the completion of the file upload, along with the file index and time taken.",
+            "description": "Updates a timestamp difference for the current file upload and triggers an event to notify the completion of uploading, logging a message to indicate the finished loading process.",
             "params": [
               {
                 "name": "event",
                 "default_value": null,
                 "optional": false,
                 "type_name": "Event",
-                "description": "Triggered when a file has finished loading."
+                "description": "Triggered by a file loading operation completion."
               }
             ],
             "usage": {
               "language": "javascript",
-              "code": "var loadFunc = new function() {\n    this.downloadStartTime = 0;\n    this.fileIndex = 0;\n    this.fileObj = null;\n}\n\nloadFunc.load({fileIndex:1, fileObj:'sampleFile'});",
-              "description": ""
+              "code": "var loadEvent = {\n    downloadStartTime: new Date().getTime(),\n    fileIndex: 1,\n    fileObj: \"example.txt\"\n};\n\nload.call(loadEvent);\n",
+              "description": "\n\nThe code above demonstrates a basic invocation of the `load` function, passing in a custom object with properties `downloadStartTime`, `fileIndex`, and `fileObj`."
             },
             "name": "load",
             "location": {
@@ -438,9 +438,9 @@
             "docLength": 10
           },
           {
-            "id": "63882e7c-1d14-669f-7f45-5a46e8e40d7c",
+            "id": "daae4a55-3264-3d85-1043-8f9a00f105bf",
             "ancestors": [],
-            "description": "Updates the file upload progress and speed by calculating the percentage, logging it, and triggering events for fileUploadProgressUpdated and fileUploadSpeedUpdated when the upload rate changes or reaches a certain threshold.",
+            "description": "Updates the progress of a file upload by calculating the percentage completed and triggering events for speed update when the upload rate refresh time is reached.",
             "params": [
               {
                 "name": "event",
@@ -452,8 +452,8 @@
             ],
             "usage": {
               "language": "javascript",
-              "code": "var progress = new Progress();\nprogress.progress({\n    loaded: 1024,\n    total: 1048576\n});\n",
-              "description": "\nUpload."
+              "code": "var event = {loaded: 100, total: 500}; // Simulating a file upload event\nprogress(event);\n",
+              "description": ""
             },
             "name": "progress",
             "location": {
@@ -471,22 +471,22 @@
             "docLength": 11
           },
           {
-            "id": "c0c9d24f-d87f-c1b9-b143-dbfdaa3b9210",
+            "id": "4835328e-1e19-8cab-f144-2c22b9450934",
             "ancestors": [],
-            "description": "Handles an event triggered by a file input element. It prevents default action, retrieves all selected files from the input element, and then calls another function `uploadFiles` to upload these files.",
+            "description": "Handles an event triggered by a file input element. It prevents the default action, retrieves all selected files, and then uploads them using the `uploadFiles` function.",
             "params": [
               {
                 "name": "event",
                 "default_value": null,
                 "optional": false,
                 "type_name": "Event",
-                "description": "Triggered when an element changes, such as file upload completion."
+                "description": "Triggered by an HTML file input field change event."
               }
             ],
             "usage": {
               "language": "javascript",
-              "code": "<input type=\"file\" id=\"myFile\" multiple onchange=\"change(event)\" />\n",
-              "description": "\nSelecting multiple files triggers a call to the change function."
+              "code": "<input type=\"file\" multiple onchange=\"change(event)\">\n",
+              "description": "\nThis code will trigger the change() function whenever a file is selected."
             },
             "name": "change",
             "location": {
