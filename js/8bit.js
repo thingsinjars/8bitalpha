@@ -34,6 +34,7 @@ function delayThenShowImages(fileName, i) {
   }
 }
 
+
 function UrlExists(url) {
   var http = new XMLHttpRequest();
   http.open('HEAD', url, false);
