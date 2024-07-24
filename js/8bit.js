@@ -1,4 +1,6 @@
 $(function() {
+  // Initializes and sets up a dropzone element on a webpage.
+
   $("#dropzone").dropzone({
     url : "upload.php",
     printLogs : true,
@@ -26,6 +28,16 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 };
 
 
+/**
+ * @description Checks if a file exists at the specified location and, if not, delays
+ * by 20 milliseconds before recursively calling itself with decremented counter until
+ * it finds the file or reaches zero. If found, it displays images in two designated
+ * elements on the page.
+ * 
+ * @param {string} fileName - Used to construct image URLs.
+ * 
+ * @param {number} i - Used for recursion control.
+ */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
     setTimeout(function() {delayThenShowImages(fileName, i);}, 20);
@@ -35,6 +47,15 @@ function delayThenShowImages(fileName, i) {
   }
 }
 
+/**
+ * @description Checks whether a given URL exists by sending an HTTP HEAD request to
+ * the server and checking the status code returned by the server. If the status code
+ * is not 404 (not found), it returns true, indicating that the URL exists.
+ * 
+ * @param {string} url - A URL to be checked for existence.
+ * 
+ * @returns {boolean} True if the requested URL exists and false otherwise.
+ */
 function UrlExists(url) {
   var http = new XMLHttpRequest();
   http.open('HEAD', url, false);

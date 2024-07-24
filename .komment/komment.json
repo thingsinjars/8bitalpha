@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "version": "1",
+    "updated_at": "2024-07-24T09:33:00.275Z",
+    "created_at": "2024-07-24T09:33:01.658Z",
+    "pipelines": [
+      "31de4f60-9115-41d7-b812-064b4bfb1515"
+    ]
+  },
+  "lookup": [
+    [
+      "js/8bit.js"
+    ]
+  ]
+}

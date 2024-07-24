@@ -1,0 +1,100 @@
+[
+  {
+    "name": "8bit.js",
+    "path": "js/8bit.js",
+    "content": {
+      "structured": {
+        "description": "A dropzone element that allows users to upload files. The uploaded files are processed by PHP and then displayed as images on the page. The code also uses Google Analytics for tracking page views. It initializes the Google Analytics tracker and sets up event tracking for uploads.",
+        "items": [
+          {
+            "id": "05d1ecf0-a912-158d-4942-ceaa07d1feb0",
+            "ancestors": [],
+            "description": "Initializes and sets up a dropzone element on a webpage.",
+            "name": null,
+            "location": {
+              "start": 1,
+              "insert": 2,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "higher_order_invocation",
+            "length": 9,
+            "docLength": null
+          },
+          {
+            "id": "8f8a42a4-1d54-5aa3-9041-7a76658a6624",
+            "ancestors": [],
+            "description": "Checks if a file exists at the specified location and, if not, delays by 20 milliseconds before recursively calling itself with decremented counter until it finds the file or reaches zero. If found, it displays images in two designated elements on the page.",
+            "params": [
+              {
+                "name": "fileName",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "Used to construct image URLs."
+              },
+              {
+                "name": "i",
+                "default_value": null,
+                "optional": false,
+                "type_name": "number",
+                "description": "Used for recursion control."
+              }
+            ],
+            "usage": {
+              "language": "javascript",
+              "code": "delayThenShowImages('test.jpg', 5);\n",
+              "description": ""
+            },
+            "name": "delayThenShowImages",
+            "location": {
+              "start": 29,
+              "insert": 29,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 8,
+            "docLength": null
+          },
+          {
+            "id": "3da8ebf6-7eff-8d8a-f147-87b10224fc2e",
+            "ancestors": [],
+            "description": "Checks whether a given URL exists by sending an HTTP HEAD request to the server and checking the status code returned by the server. If the status code is not 404 (not found), it returns true, indicating that the URL exists.",
+            "params": [
+              {
+                "name": "url",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "A URL to be checked for existence."
+              }
+            ],
+            "returns": {
+              "type_name": "boolean",
+              "description": "True if the requested URL exists and false otherwise."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "var url = 'http://www.example.com';\nif (UrlExists(url)) {\n  alert('URL exists');\n} else {\n  alert('URL does not exist');\n}\n",
+              "description": ""
+            },
+            "name": "UrlExists",
+            "location": {
+              "start": 38,
+              "insert": 38,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 6,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  }
+]
