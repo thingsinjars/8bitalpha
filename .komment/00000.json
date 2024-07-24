@@ -4,12 +4,12 @@
     "path": "js/8bit.js",
     "content": {
       "structured": {
-        "description": "A dropzone element that allows users to upload files. The uploaded files are processed by PHP and then displayed as images on the page. The code also uses Google Analytics for tracking page views. It initializes the Google Analytics tracker and sets up event tracking for uploads.",
+        "description": "Two Dropzone instances and initializes them with configuration options for uploading files. It handles file uploads by displaying a spinner and then appending images to the DOM once uploaded. The code also includes Google Analytics tracking code and a helper function for checking URL existence.",
         "items": [
           {
-            "id": "05d1ecf0-a912-158d-4942-ceaa07d1feb0",
+            "id": "6e75dee7-922b-a19f-bc4a-c46d4e39c066",
             "ancestors": [],
-            "description": "Initializes and sets up a dropzone element on a webpage.",
+            "description": "Initializes a drop zone for file uploads and toggles an about section.",
             "name": null,
             "location": {
               "start": 1,
@@ -23,29 +23,29 @@
             "docLength": null
           },
           {
-            "id": "8f8a42a4-1d54-5aa3-9041-7a76658a6624",
+            "id": "415f0feb-f6b8-c1b4-634d-5431b837bd8c",
             "ancestors": [],
-            "description": "Checks if a file exists at the specified location and, if not, delays by 20 milliseconds before recursively calling itself with decremented counter until it finds the file or reaches zero. If found, it displays images in two designated elements on the page.",
+            "description": "Checks if a file exists, and if not, it waits for a specified time before checking again. If the file still does not exist after a few attempts, it stops waiting and shows an image from that file.",
             "params": [
               {
                 "name": "fileName",
                 "default_value": null,
                 "optional": false,
                 "type_name": "string",
-                "description": "Used to construct image URLs."
+                "description": "Used to construct file paths."
               },
               {
                 "name": "i",
                 "default_value": null,
                 "optional": false,
                 "type_name": "number",
-                "description": "Used for recursion control."
+                "description": "Used to limit recursive calls."
               }
             ],
             "usage": {
               "language": "javascript",
-              "code": "delayThenShowImages('test.jpg', 5);\n",
-              "description": ""
+              "code": "delayThenShowImages('image1.jpg', 5);\n",
+              "description": "\n\nThis will execute the delayThenShowImages function with filename 'image1.jpg' and counter i set to 5."
             },
             "name": "delayThenShowImages",
             "location": {
@@ -60,25 +60,25 @@
             "docLength": null
           },
           {
-            "id": "3da8ebf6-7eff-8d8a-f147-87b10224fc2e",
+            "id": "e532622e-8772-1383-cb49-44d5db6c0037",
             "ancestors": [],
-            "description": "Checks whether a given URL exists by sending an HTTP HEAD request to the server and checking the status code returned by the server. If the status code is not 404 (not found), it returns true, indicating that the URL exists.",
+            "description": "Checks whether a given URL exists or not by making a HEAD request to the specified URL using the XMLHttpRequest object. It returns a boolean value indicating whether the URL exists (status is not 404) or does not exist (status is 404).",
             "params": [
               {
                 "name": "url",
                 "default_value": null,
                 "optional": false,
                 "type_name": "string",
-                "description": "A URL to be checked for existence."
+                "description": "Expected as a URL to be checked for existence."
               }
             ],
             "returns": {
               "type_name": "boolean",
-              "description": "True if the requested URL exists and false otherwise."
+              "description": "True if the URL exists and false otherwise."
             },
             "usage": {
               "language": "javascript",
-              "code": "var url = 'http://www.example.com';\nif (UrlExists(url)) {\n  alert('URL exists');\n} else {\n  alert('URL does not exist');\n}\n",
+              "code": "var url = \"https://www.example.com\";\nif (UrlExists(url)) {\n    alert(\"URL exists\");\n} else {\n    alert(\"URL does not exist\");\n}\n",
               "description": ""
             },
             "name": "UrlExists",
