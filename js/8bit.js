@@ -25,6 +25,7 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 	}
 };
 
+
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
     setTimeout(function() {delayThenShowImages(fileName, i);}, 20);
