@@ -1,5 +1,5 @@
 $(function() {
-  // Initializes a drop zone for file uploads and toggles an about section.
+  // Initializes a file upload interface.
 
   $("#dropzone").dropzone({
     url : "upload.php",
@@ -29,13 +29,13 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 
 
 /**
- * @description Checks if a file exists, and if not, it waits for a specified time
- * before checking again. If the file still does not exist after a few attempts, it
- * stops waiting and shows an image from that file.
+ * @description Checks if a file with the specified name exists in the 'tmp' directory.
+ * If not, it recursively calls itself after a 20ms delay until the file is found or
+ * the recursive count reaches zero. Then, it displays the image in two different places.
  * 
- * @param {string} fileName - Used to construct file paths.
+ * @param {string} fileName - Used to construct a file path for temporary images.
  * 
- * @param {number} i - Used to limit recursive calls.
+ * @param {number} i - Used to control recursion depth.
  */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
@@ -47,14 +47,14 @@ function delayThenShowImages(fileName, i) {
 }
 
 /**
- * @description Checks whether a given URL exists or not by making a HEAD request to
- * the specified URL using the XMLHttpRequest object. It returns a boolean value
- * indicating whether the URL exists (status is not 404) or does not exist (status
- * is 404).
+ * @description Checks if a specified URL exists by sending a HEAD request to the URL
+ * using XMLHttpRequest. It returns true if the response status is not 404 (indicating
+ * the URL exists), and false otherwise.
  * 
- * @param {string} url - Expected as a URL to be checked for existence.
+ * @param {string} url - Used to specify the URL to check for existence.
  * 
- * @returns {boolean} True if the URL exists and false otherwise.
+ * @returns {boolean} True if the HTTP status code received from the server for the
+ * given URL is other than 404 (Not Found), and false otherwise.
  */
 function UrlExists(url) {
   var http = new XMLHttpRequest();
