@@ -1,5 +1,5 @@
 $(function() {
-  // Initializes a dropzone and toggles an element.
+  // Initializes dropzone and toggles about section.
 
   $("#dropzone").dropzone({
     url : "upload.php",
@@ -29,13 +29,14 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 
 
 /**
- * @description Delays showing images for a specified number of times (controlled by
- * variable `i`) before displaying them if they do not exist locally, then displays
- * the images on the page using jQuery.
+ * @description Checks if a file exists at a specified location, and if not, delays
+ * execution by 20 milliseconds before retrying the check up to a specified number
+ * of times. If the file exists, it displays two images: one in a drop zone and another
+ * on a downloadables page.
  *
- * @param {string} fileName - Used to construct URLs.
+ * @param {string} fileName - Used to identify an image file.
  *
- * @param {number} i - Used to track recursive calls.
+ * @param {number} i - 0-based index for recursion limit.
  */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
@@ -47,15 +48,15 @@ function delayThenShowImages(fileName, i) {
 }
 
 /**
- * @description Checks whether a URL exists or not by sending an HTTP HEAD request
- * to it and checking the response status. It returns `true` if the status is not 404
- * (indicating the URL exists), and `false` otherwise, indicating that the URL does
- * not exist.
+ * @description Checks if a given URL exists by sending a HEAD request and returns
+ * true if the status code is not 404 (Not Found), indicating that the URL is valid,
+ * otherwise it returns false.
  *
  * @param {string} url - The URL to be checked for existence.
  *
- * @returns {boolean} True if the specified URL exists and false otherwise, indicating
- * whether a HEAD request to the URL returned a status code other than 404.
+ * @returns {boolean} True if the HTTP request to the specified URL was successful
+ * and did not result in a 404 status code, indicating that the resource exists;
+ * otherwise, it returns false.
  */
 function UrlExists(url) {
   var http = new XMLHttpRequest();
