@@ -1,0 +1,100 @@
+[
+  {
+    "name": "8bit.js",
+    "path": "js/8bit.js",
+    "content": {
+      "structured": {
+        "description": "JavaScript functionality for handling file uploads and displaying uploaded files in a dropzone. It utilizes jQuery for DOM manipulation and the Google Analytics library to track page views. The code includes custom functions for handling uploaded files, specifically PNG images, and checking if URLs exist using XMLHttpRequest.",
+        "items": [
+          {
+            "id": "47abc564-bca7-0a8c-ae41-62c45d4c5f3b",
+            "ancestors": [],
+            "description": "Initializes and configures a dropzone for file uploads and also toggles an about section.",
+            "name": null,
+            "location": {
+              "start": 1,
+              "insert": 2,
+              "offset": " ",
+              "indent": 2,
+              "comment": null
+            },
+            "item_type": "higher_order_invocation",
+            "length": 9,
+            "docLength": null
+          },
+          {
+            "id": "6bb6f8e6-5e90-5785-ca43-22c421e29157",
+            "ancestors": [],
+            "description": "Checks if a file exists and if not, waits for a specified time (20ms) before re-checking. If the file still doesn't exist, it recursively calls itself until the file is found or a maximum number of attempts is reached, then displays the image(s).",
+            "params": [
+              {
+                "name": "fileName",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "Used to specify the name of an image file."
+              },
+              {
+                "name": "i",
+                "default_value": null,
+                "optional": false,
+                "type_name": "number",
+                "description": "Used as a counter for recursion."
+              }
+            ],
+            "usage": {
+              "language": "javascript",
+              "code": "delayThenShowImages('image1.jpg', 5);\n",
+              "description": "\nThis will show images with names 'image1.jpg' in the specified dropzone."
+            },
+            "name": "delayThenShowImages",
+            "location": {
+              "start": 29,
+              "insert": 29,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 8,
+            "docLength": null
+          },
+          {
+            "id": "9e7c4d04-f402-45b5-0644-d3ecfb4abd88",
+            "ancestors": [],
+            "description": "Checks if a URL exists by sending a HEAD request to the server using XMLHttpRequest. It returns true if the status code is not 404 (indicating the resource was found), and false otherwise, effectively determining whether the URL exists or not.",
+            "params": [
+              {
+                "name": "url",
+                "default_value": null,
+                "optional": false,
+                "type_name": "string",
+                "description": "The URL to be checked for existence."
+              }
+            ],
+            "returns": {
+              "type_name": "boolean",
+              "description": "True if the requested URL exists and false otherwise."
+            },
+            "usage": {
+              "language": "javascript",
+              "code": "var result = UrlExists('https://www.example.com');\nalert(result);\n",
+              "description": ""
+            },
+            "name": "UrlExists",
+            "location": {
+              "start": 38,
+              "insert": 38,
+              "offset": " ",
+              "indent": 0,
+              "comment": null
+            },
+            "item_type": "function",
+            "length": 6,
+            "docLength": null
+          }
+        ]
+      }
+    }
+  }
+]
