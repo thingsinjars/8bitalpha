@@ -1,5 +1,5 @@
 $(function() {
-  // Initializes Dropzone and toggles an element's visibility on click.
+  // Initializes an upload zone and binds click events.
   $("#dropzone").dropzone({
     url : "upload.php",
     printLogs : true,
@@ -28,14 +28,14 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 
 
 /**
- * @description Checks if a file exists at the specified location. If it does not
- * exist, the function  delays execution by 20 milliseconds and recursively calls
- * itself with reduced counter value until the existence check is successful or the
- * counter reaches zero.
+ * @description Checks if a file exists at a specified URL, delaying its execution
+ * by 20 milliseconds if it does not exist and attempts to check again up to a certain
+ * number of times (`i`). If the file is found or the maximum number of attempts is
+ * reached, it displays two images.
  *
- * @param {string} fileName - Used to construct URLs for image files.
+ * @param {string} fileName - The name of an image file.
  *
- * @param {number} i - Used for recursive delay calls, decrementing with each call.
+ * @param {number} i - Used to track iterations.
  */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
@@ -47,11 +47,11 @@ function delayThenShowImages(fileName, i) {
 }
 
 /**
- * @description Checks if a URL exists by sending a HEAD request to it using
- * XMLHttpRequest. The function returns true if the status code is not 404 (indicating
- * the URL exists) and false otherwise, allowing for asynchronous or synchronous use.
+ * @description Checks if a given URL exists by sending an HTTP HEAD request to it
+ * and returns true if the status code is not 404 (Not Found). It assumes synchronous
+ * mode to immediately determine the status code.
  *
- * @param {string} url - Used to pass a URL to be checked for existence.
+ * @param {string} url - The URL to be checked for existence.
  *
  * @returns {boolean} True if the URL exists and false otherwise.
  */
