@@ -8,6 +8,7 @@ $(function() {
   $('#questions, #about_close').click(function() {$('#about').toggle();})
 });
 
+
 $.fn.dropzone.newFilesDropped = function() {
   $('#dropzone').empty().append($('<img src="images/spinner.gif" />').css({margin:'50px'}));
   $('#downloadables').empty();
