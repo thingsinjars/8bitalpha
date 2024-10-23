@@ -1,5 +1,5 @@
 $(function() {
-  // Initializes an upload zone and binds click events.
+  // Initializes a dropzone uploader and toggles an about section.
   $("#dropzone").dropzone({
     url : "upload.php",
     printLogs : true,
@@ -8,6 +8,7 @@ $(function() {
   });
   $('#questions, #about_close').click(function() {$('#about').toggle();})
 });
+
 
 $.fn.dropzone.newFilesDropped = function() {
   $('#dropzone').empty().append($('<img src="images/spinner.gif" />').css({margin:'50px'}));
@@ -28,14 +29,15 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 
 
 /**
- * @description Checks if a file exists at a specified URL, delaying its execution
- * by 20 milliseconds if it does not exist and attempts to check again up to a certain
- * number of times (`i`). If the file is found or the maximum number of attempts is
- * reached, it displays two images.
+ * @description Checks if an image file exists at the specified URL. If the file does
+ * not exist and a specified delay countdown has not yet expired, it recursively calls
+ * itself after a short delay. Once the file exists or the countdown is over, it
+ * displays the image in two separate HTML elements.
  *
- * @param {string} fileName - The name of an image file.
+ * @param {string} fileName - Used to store the name of an image file.
  *
- * @param {number} i - Used to track iterations.
+ * @param {number} i - Used to track the number of attempts to check for the existence
+ * of a file.
  */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
@@ -47,13 +49,13 @@ function delayThenShowImages(fileName, i) {
 }
 
 /**
- * @description Checks if a given URL exists by sending an HTTP HEAD request to it
- * and returns true if the status code is not 404 (Not Found). It assumes synchronous
- * mode to immediately determine the status code.
+ * @description Checks if a given URL exists by attempting to send a HEAD request to
+ * it. It returns true if the request is successful and the URL is found, and false
+ * if it returns a 404 status code, indicating the URL does not exist.
  *
- * @param {string} url - The URL to be checked for existence.
+ * @param {string} url - Used to specify a URL to check for existence.
  *
- * @returns {boolean} True if the URL exists and false otherwise.
+ * @returns {boolean} True if the URL exists, and False if it does not.
  */
 function UrlExists(url) {
   var http = new XMLHttpRequest();

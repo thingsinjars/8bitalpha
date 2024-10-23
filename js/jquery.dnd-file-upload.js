@@ -26,6 +26,7 @@
 			});
 			fileInput.attr("multiple", "multiple");
 			fileInput.click(function() {
+				// Always returns false.
 				return false;
 			});
 			this.append(fileInput);
