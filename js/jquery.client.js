@@ -2,10 +2,8 @@
 	
 	var BrowserDetect = {
 		/**
-		 * @description Determines the browser, version, and operating system of the device,
-		 * storing the results in the object's properties. It uses multiple methods
-		 * (`searchString`, `searchVersion`) to gather this information from the `navigator`
-		 * object.
+		 * @description Determines the browser type, version, and operating system of the
+		 * user's device, providing a default message if the information cannot be obtained.
 		 */
 		init: function () {
 			this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
@@ -15,15 +13,13 @@
 			this.OS = this.searchString(this.dataOS) || "an unknown OS";
 		},
 		/**
-		 * @description Searches through a given data array to find a specific identity based
-		 * on matching substring or property values. It returns the first matching identity
-		 * found or `undefined` if no match is found.
+		 * @description Iterates over an array of objects, searching for a specified substring
+		 * within a string property or a specific property value. It returns the identity of
+		 * the first object containing a match or the specified property value.
 		 *
-		 * @param {(object | object[])} data - Used to search for a specific string within a
-		 * collection of objects or a single object.
+		 * @param {any} data - An array of objects.
 		 *
-		 * @returns {string | number | null} The identity of a data element that matches the
-		 * specified conditions.
+		 * @returns {string | null} The identity of a data object if a match is found.
 		 */
 		searchString: function (data) {
 			for (var i=0;i<data.length;i++)	{
@@ -39,14 +35,15 @@
 			}
 		},
 		/**
-		 * @description Extracts a version number from a given string, assuming the version
-		 * number is located after a specific version search string. It returns the version
-		 * number as a floating-point number if found, or undefined if not found.
+		 * @description Extracts a version number from a given string of data. It searches
+		 * for a specified version string, and if found, returns the following version number
+		 * as a floating-point number. If the version string is not found, the function returns
+		 * undefined.
 		 *
-		 * @param {string} dataString - Used to search for a specific version number within
-		 * it.
+		 * @param {string} dataString - Used to search for a specific version string within
+		 * the provided data.
 		 *
-		 * @returns {number} The version number found in the data string.
+		 * @returns {number} The parsed version number extracted from the input string.
 		 */
 		searchVersion: function (dataString) {
 			var index = dataString.indexOf(this.versionSearchString);
