@@ -1,5 +1,6 @@
 $(function() {
-  // Initializes a dropzone for file uploads and toggles a hidden content section.
+  // Initializes a file upload functionality via the Dropzone library and sets up a
+  // toggle event for an about section.
   $("#dropzone").dropzone({
     url : "upload.php",
     printLogs : true,
@@ -30,14 +31,14 @@ $.fn.dropzone.uploadFinished = function(fileIndex, file, time) {
 
 /**
  * @description Checks for the existence of a file in the 'tmp' directory. If the
- * file does not exist or a specified timeout period (20ms) has elapsed, it recursively
- * calls itself. Otherwise, it displays the image in two different HTML elements.
+ * file does not exist and the counter `i` is greater than 0, it waits 20 milliseconds
+ * and recursively calls itself. If the file exists or `i` reaches 0, it displays the
+ * image in two locations on the page.
  *
- * @param {string} fileName - Used to construct the path of an image file to be
- * displayed in the `tmp` directory.
+ * @param {string} fileName - Used to represent the name of an image file.
  *
- * @param {number} i - Used as a counter to prevent infinite recursion in case of
- * missing files.
+ * @param {number} i - Used to prevent infinite recursion in case the file does not
+ * exist.
  */
 function delayThenShowImages(fileName, i) {
   if( !UrlExists('tmp/' + fileName) && i-->0 ) {
@@ -50,12 +51,13 @@ function delayThenShowImages(fileName, i) {
 
 /**
  * @description Checks if a given URL exists by attempting to send a HEAD request to
- * it. It returns true if the request is successful and the status code is not 404
- * (indicating the URL does not exist), and false otherwise.
+ * the URL. It returns true if the request is successful (status code other than 404),
+ * indicating the URL exists, and false otherwise.
  *
- * @param {string} url - The URL to be checked for existence.
+ * @param {string} url - Describing the `url` parameter, it is used to specify the
+ * URL to be checked for existence.
  *
- * @returns {boolean} True if the URL exists, and false if the URL does not exist.
+ * @returns {boolean} True if the URL exists and false otherwise.
  */
 function UrlExists(url) {
   var http = new XMLHttpRequest();
