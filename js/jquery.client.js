@@ -1,6 +1,10 @@
 (function() {
 	
 	var BrowserDetect = {
+		/**
+		 * @description Determines the browser type, version, and operating system of the
+		 * user's device, providing a default message if the information cannot be obtained.
+		 */
 		init: function () {
 			this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
 			this.version = this.searchVersion(navigator.userAgent)
@@ -8,6 +12,15 @@
 				|| "an unknown version";
 			this.OS = this.searchString(this.dataOS) || "an unknown OS";
 		},
+		/**
+		 * @description Iterates over an array of objects, searching for a specified substring
+		 * within a string property or a specific property value. It returns the identity of
+		 * the first object containing a match or the specified property value.
+		 *
+		 * @param {any} data - An array of objects.
+		 *
+		 * @returns {string | null} The identity of a data object if a match is found.
+		 */
 		searchString: function (data) {
 			for (var i=0;i<data.length;i++)	{
 				var dataString = data[i].string;
@@ -21,6 +34,17 @@
 					return data[i].identity;
 			}
 		},
+		/**
+		 * @description Extracts a version number from a given string of data. It searches
+		 * for a specified version string, and if found, returns the following version number
+		 * as a floating-point number. If the version string is not found, the function returns
+		 * undefined.
+		 *
+		 * @param {string} dataString - Used to search for a specific version string within
+		 * the provided data.
+		 *
+		 * @returns {number} The parsed version number extracted from the input string.
+		 */
 		searchVersion: function (dataString) {
 			var index = dataString.indexOf(this.versionSearchString);
 			if (index == -1) return;
